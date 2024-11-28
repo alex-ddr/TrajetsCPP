@@ -9,7 +9,7 @@ Trajet::Trajet()
 {
 }
 
-Trajet::Trajet(Ville depart, Ville destination)
+Trajet::Trajet(const char* depart, const char* destination)
 {
     this->depart = depart;
     this->destination = destination;
@@ -24,14 +24,18 @@ Trajet::~Trajet ( )
 //-------------------------------------------------------------- PROTEGEES
 
 // Methodes
+void Trajet::AfficherTrajet(int index) const
+{
+    cout << "Trajet n°" << index << " de " << this->depart << " à " << this->destination << endl;
+}
 
 // Getters
-Ville Trajet::getDepart()
+const char* Trajet::getDepart()
 {
     return this->depart;
 }
 
-Ville Trajet::getDestination()
+const char* Trajet::getDestination()
 {
     return this->destination;
 }

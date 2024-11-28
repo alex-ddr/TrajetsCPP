@@ -20,6 +20,7 @@ public:
 
     // Methodes
     void AjouterTrajet(Trajet t);
+    void AfficherCatalogue() const;
 };
 
 

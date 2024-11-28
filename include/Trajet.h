@@ -12,22 +12,23 @@
 class Trajet {
 protected:
     // Attributs
-    Ville depart;
-    Ville destination;
+    const char* depart;
+    const char* destination;
 
 public:
     // Constructeur
     Trajet();
-    Trajet(Ville depart, Ville destination);
+    Trajet(const char* depart, const char* destination);
 
     // Destructeur
     virtual ~Trajet();
 
     // Methodes
+    void AfficherTrajet(int index) const;
 
     // Getters
-    Ville getDepart();
-    Ville getDestination();
+    const char* getDepart();
+    const char* getDestination();
 };
 
 

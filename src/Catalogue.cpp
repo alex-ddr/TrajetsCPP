@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/Catalogue.h"
+#include <cstring>
 using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
@@ -13,8 +14,15 @@ Catalogue::Catalogue()
 
 
 // Destructeur
-Catalogue::~Catalogue ( )
+Catalogue::~Catalogue()
 {
+    ElemTrajet* current = liste_trajets;
+    while (current != nullptr)
+    {
+        ElemTrajet* next = current->getNext();
+        delete current;
+        current = next;
+    }
 }
 
 
@@ -25,27 +33,49 @@ void Catalogue::AjouterTrajet(Trajet t)
 {
     ElemTrajet* new_elem = new ElemTrajet(t);
 
-    if (liste_trajets == nullptr)
+    if (liste_trajets == nullptr) // Liste vide
         liste_trajets = new_elem;
-
+    
     else
     {
-        // Déclaration des pointeurs de recherche
-        ElemTrajet* prev = liste_trajets;
+        // Recherche de la bonne position
+        ElemTrajet* prev = nullptr;
         ElemTrajet* current = liste_trajets;
 
-        // Chercher la bonne place dans l'ordre alphabétique
-        while ((new_elem->getTrajet().getDepart() > current->getTrajet().getDepart()) || current->getNext() != nullptr)
+        while (current != nullptr && 
+               (strcasecmp(new_elem->getTrajet().getDepart(), current->getTrajet().getDepart()) > 0))
         {
             prev = current;
             current = current->getNext();
         }
 
-        // Insérer le nouveau trajet à la place trouvée
-        prev->setNext(new_elem);
-        new_elem->setNext(current);
+        if (prev == nullptr) // Insérer en tête
+        {
+            new_elem->setNext(liste_trajets);
+            liste_trajets = new_elem;
+        }
+        else // Insérer entre prev et current
+        {
+            prev->setNext(new_elem);
+            new_elem->setNext(current);
+        }
     }
 
     nb_trajets++;
+}
+
+
+void Catalogue::AfficherCatalogue() const
+{
+    printf("Catalogue de %d trajets :\n\n", nb_trajets);
+    int index = 1;
+    ElemTrajet* current = liste_trajets;
+
+    while (current)
+    {
+        current->getTrajet().AfficherTrajet(index);
+        current = current->getNext();
+        index++;
+    }
 }
 

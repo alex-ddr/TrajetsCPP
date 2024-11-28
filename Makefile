@@ -1,23 +1,27 @@
 # Nom de l'exécutable
-tp2: main.o Catalogue.o ElemTrajet.o Trajet.o functions.o
-		g++ -o tp2 main.o Catalogue.o ElemTrajet.o Trajet.o functions.o
+tp2: build/main.o build/Catalogue.o build/ElemTrajet.o build/Trajet.o build/functions.o
+	g++ -o tp2 build/main.o build/Catalogue.o build/ElemTrajet.o build/Trajet.o build/functions.o
 
 # Compilation des fichiers objets
-main.o: main.cpp include/Catalogue.h include/ElemTrajet.h include/Trajet.h include/functions.h
-		g++ -c main.cpp -Iinclude
+build/main.o: src/main.cpp include/Catalogue.h include/ElemTrajet.h include/Trajet.h include/functions.h | build
+	g++ -c src/main.cpp -Iinclude -o build/main.o
 
-Catalogue.o: src/Catalogue.cpp include/Catalogue.h include/ElemTrajet.h
-		g++ -c src/Catalogue.cpp -Iinclude
+build/Catalogue.o: src/Catalogue.cpp include/Catalogue.h include/ElemTrajet.h | build
+	g++ -c src/Catalogue.cpp -Iinclude -o build/Catalogue.o
 
-ElemTrajet.o: src/ElemTrajet.cpp include/ElemTrajet.h include/Trajet.h
-		g++ -c src/ElemTrajet.cpp -Iinclude
+build/ElemTrajet.o: src/ElemTrajet.cpp include/ElemTrajet.h include/Trajet.h | build
+	g++ -c src/ElemTrajet.cpp -Iinclude -o build/ElemTrajet.o
 
-Trajet.o: src/Trajet.cpp include/Trajet.h
-		g++ -c src/Trajet.cpp -Iinclude
+build/Trajet.o: src/Trajet.cpp include/Trajet.h | build
+	g++ -c src/Trajet.cpp -Iinclude -o build/Trajet.o
 
-functions.o: src/functions.cpp include/functions.h
-		g++ -c src/functions.cpp -Iinclude
+build/functions.o: src/functions.cpp include/functions.h | build
+	g++ -c src/functions.cpp -Iinclude -o build/functions.o
+
+# Création du dossier build
+build:
+	mkdir -p build
 
 # Nettoyage
 clean:
-		rm -f *.o tp2
+	rm -rf build tp2

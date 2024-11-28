@@ -3,48 +3,6 @@
 
 using namespace std;
 
-enum Ville {
-  AixEnProvence,
-  Amiens,
-  Angers,
-  Argenteuil,
-  Besancon,
-  Bordeaux,
-  BoulogneBillancourt,
-  Brest,
-  Caen,
-  ClermontFerrand,
-  Dijon,
-  Grenoble,
-  LeHavre,
-  LeMans,
-  Lille,
-  Limoges,
-  Lyon,
-  Marseille,
-  Metz,
-  Montreuil,
-  Montpellier,
-  Mulhouse,
-  Nancy,
-  Nantes,
-  Nice,
-  Nimes,
-  Orleans,
-  Paris,
-  Perpignan,
-  Reims,
-  Rennes,
-  Rouen,
-  SaintDenis,
-  SaintEtienne,
-  Strasbourg,
-  Toulon,
-  Toulouse,
-  Tours,
-  Villeurbanne
-};
-
 enum Transport {
   Voiture,
   Train,
