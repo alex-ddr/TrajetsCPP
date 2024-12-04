@@ -3,6 +3,7 @@
 #define Catalogue_H
 
 #include "Trajet.h"
+#include "../include/TS.h"
 #include "ElemTrajet.h"
 
 class Catalogue {
@@ -11,6 +12,8 @@ protected:
     int nb_trajets;
     ElemTrajet* liste_trajets;
 
+    void CreerTrajetCompose();
+    void CreerTrajetSimple();
 public:
     // Constructeur
     Catalogue();
@@ -20,7 +23,7 @@ public:
 
     // Methodes
     void AjouterTrajet(Trajet t);
-    void AjouterTrajet();
+    void CreerTrajet();
     void SupprimerTrajet(Trajet t);
     void AfficherCatalogue() const;
     void InitialiserCatalogue();

@@ -3,6 +3,8 @@
 #define TS_H
 #include "Trajet.h"
 
+#include "Trajet.h"
+
 //------------------------------------------------------------------------
 // Rôle de la classe <TS>
 // Cette classe représente un trajet simple.

@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../include/Catalogue.h"
 #include <cstring>
-#include "Catalogue.h"
+
+#include "../include/Catalogue.h"
 
 using namespace std;
 
@@ -77,41 +77,74 @@ void Catalogue::AjouterTrajet(Trajet t)
     nb_trajets++;
 }
 
-void Catalogue::AjouterTrajet()
+void Catalogue::CreerTrajet()
+{
+    cout << "------------------------------------\n";
+    cout << "Voulez vous ajouter un trajet simple ou composé ?\n\t1. Trajet simple\n\t2. Trajet composé\n";
+
+    int choice;
+    cin >> choice;
+    if (choice == 0)
+    {
+        CreerTrajetSimple();
+    }
+    else
+    {
+        CreerTrajetCompose();
+    }
+}
+
+void Catalogue::CreerTrajetSimple()
 {
     // Déclare des buffers pour lire les entrées utilisateur
     char ville1_buffer[100];
     char ville2_buffer[100];
+    char transport_buffer[100];
 
     // Lire les entrées utilisateur dans les buffers
     cout << "Entrez la première ville : ";
     cin >> ville1_buffer;
+    const char* ville1 = ville1_buffer;
 
     cout << "Entrez la deuxième ville : ";
     cin >> ville2_buffer;
-
-    // Déclare des const char* pointant vers les buffers
-    const char* ville1 = ville1_buffer;
     const char* ville2 = ville2_buffer;
+
+    cout << "Entrez le moyen de transport : ";
+    cin >> transport_buffer;
+    const char* transport = transport_buffer;
 
     Ville v1 = GetVille(ville1);
     Ville v2 = GetVille(ville2);
+    Transport t = GetTransport(transport);
 
     if (v1 == UNKNOWN_VILLE)
     {
-        printf("Choisir la ville %s n'est pas possible.", ville2);
+        cout << "Choisir la ville " << ville2 << " n'est pas possible."; 
         return;
     }
     else if (v2 == UNKNOWN_VILLE)
     {
-        printf("Choisir la ville %s n'est pas possible.", ville2);
+        cout << "Choisir la ville " << ville2 << " n'est pas possible.";      
+        return;
+    }
+    
+    if (t ==  UNKNOWN_TRANSPORT)
+    {
+        cout << "Choisir le transport "<< transport << " n'est pas possible.";
         return;
     }
 
-    Trajet t(v1, v2);
+    TS traj(v1, v2, t);
 
-    this->AjouterTrajet(t);
+    this->AjouterTrajet(traj);
 }
+
+void Catalogue::CreerTrajetCompose()
+{
+    // à implémenter
+}
+
 
 void Catalogue::InitialiserCatalogue()
 {
@@ -142,7 +175,7 @@ void Catalogue::InitialiserCatalogue()
 
 void Catalogue::AfficherCatalogue() const
 {
-    printf("Catalogue de %d trajets :\n\n", nb_trajets);
+    cout << "Catalogue de " << nb_trajets << " trajets :\n\n";
     int index = 1;
     ElemTrajet* current = liste_trajets;
 
