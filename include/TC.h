@@ -2,6 +2,8 @@
 #if ! defined ( TC_H )
 #define TC_H
 
+#include "../include/TS.h"
+
 //------------------------------------------------------------------------
 // Rôle de la classe <TC>
 // Cette classe représente un trajet simple.
@@ -22,9 +24,8 @@ public:
     virtual ~TC();
 
     // Methodes
-    Transport GetTransport();
 
-    // void AfficherTC(int index) const;
+    void AfficherTrajet(int index) const;
 };
 
 

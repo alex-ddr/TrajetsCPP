@@ -9,11 +9,11 @@ TC::TC()
 {
 }
 
-TC::TC(const char* depart, const char* destination):TC(depart, destination)
+TC::TC(const char* depart, const char* destination):Trajet(depart, destination)
 {
 }
 
-TC::TC(Ville depart, Ville destination):TC(depart, destination)
+TC::TC(Ville depart, Ville destination):Trajet(depart, destination)
 {
 }
 
@@ -25,19 +25,7 @@ TC::~TC ( )
 
 
 // Méthodes
-TC::GetTransport()
+void TC::AfficherTrajet(int index) const
 {
-    return this->transport;
-}
-
-TC::AfficherTrajet(int index) const
-{
-    TC::AfficherTrajet(index);
-    
-    if (transport == Velo || transprt = Velov || transport == Cheval || transport == Pieds)
-        cout << "à ";
-    else
-        cout << "en ";
-
-    cout << transport;
+    Trajet::AfficherTrajet(index);
 }

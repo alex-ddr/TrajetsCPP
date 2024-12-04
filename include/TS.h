@@ -1,6 +1,7 @@
 //---------- Interface de la classe <TS> (fichier TS.h) ----------------
 #if ! defined ( TS_H )
 #define TS_H
+#include "Trajet.h"
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TS>
