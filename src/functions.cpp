@@ -1,6 +1,54 @@
 #include "../include/functions.h"
 #include <cstring>
 
+Ville GetVille(const char* nomVille) {
+    if (strcasecmp(nomVille, "AixEnProvence") == 0) return AixEnProvence;
+    if (strcasecmp(nomVille, "Amiens") == 0) return Amiens;
+    if (strcasecmp(nomVille, "Angers") == 0) return Angers;
+    if (strcasecmp(nomVille, "Argenteuil") == 0) return Argenteuil;
+    if (strcasecmp(nomVille, "Besancon") == 0) return Besancon;
+    if (strcasecmp(nomVille, "Bordeaux") == 0) return Bordeaux;
+    if (strcasecmp(nomVille, "BoulogneBillancourt") == 0) return BoulogneBillancourt;
+    if (strcasecmp(nomVille, "Brest") == 0) return Brest;
+    if (strcasecmp(nomVille, "Caen") == 0) return Caen;
+    if (strcasecmp(nomVille, "ClermontFerrand") == 0) return ClermontFerrand;
+    if (strcasecmp(nomVille, "Dijon") == 0) return Dijon;
+    if (strcasecmp(nomVille, "Grenoble") == 0) return Grenoble;
+    if (strcasecmp(nomVille, "LeHavre") == 0) return LeHavre;
+    if (strcasecmp(nomVille, "LeMans") == 0) return LeMans;
+    if (strcasecmp(nomVille, "Lille") == 0) return Lille;
+    if (strcasecmp(nomVille, "Limoges") == 0) return Limoges;
+    if (strcasecmp(nomVille, "Lyon") == 0) return Lyon;
+    if (strcasecmp(nomVille, "Marseille") == 0) return Marseille;
+    if (strcasecmp(nomVille, "Metz") == 0) return Metz;
+    if (strcasecmp(nomVille, "Montreuil") == 0) return Montreuil;
+    if (strcasecmp(nomVille, "Montpellier") == 0) return Montpellier;
+    if (strcasecmp(nomVille, "Mulhouse") == 0) return Mulhouse;
+    if (strcasecmp(nomVille, "Nancy") == 0) return Nancy;
+    if (strcasecmp(nomVille, "Nantes") == 0) return Nantes;
+    if (strcasecmp(nomVille, "Nice") == 0) return Nice;
+    if (strcasecmp(nomVille, "Nimes") == 0) return Nimes;
+    if (strcasecmp(nomVille, "Orleans") == 0) return Orleans;
+    if (strcasecmp(nomVille, "Paris") == 0) return Paris;
+    if (strcasecmp(nomVille, "Perpignan") == 0) return Perpignan;
+    if (strcasecmp(nomVille, "Reims") == 0) return Reims;
+    if (strcasecmp(nomVille, "Rennes") == 0) return Rennes;
+    if (strcasecmp(nomVille, "Rouen") == 0) return Rouen;
+    if (strcasecmp(nomVille, "SaintDenis") == 0) return SaintDenis;
+    if (strcasecmp(nomVille, "SaintEtienne") == 0) return SaintEtienne;
+    if (strcasecmp(nomVille, "Strasbourg") == 0) return Strasbourg;
+    if (strcasecmp(nomVille, "Toulon") == 0) return Toulon;
+    if (strcasecmp(nomVille, "Toulouse") == 0) return Toulouse;
+    if (strcasecmp(nomVille, "Tours") == 0) return Tours;
+    if (strcasecmp(nomVille, "Villeurbanne") == 0) return Villeurbanne;
+
+    return Paris; // Ville par défaut (capitale !)
+}
+
+const char* GetNomVille(Ville ville) {
+    return nomsVille[ville];
+}
+
 Transport GetTransport(const char* nomTransport) {
     if (strcasecmp(nomTransport, "Voiture") == 0) return Voiture;
     if (strcasecmp(nomTransport, "Train") == 0) return Train;
@@ -28,29 +76,5 @@ Transport GetTransport(const char* nomTransport) {
 }
 
 const char* GetNomTransport(Transport transport) {
-    switch (transport) {
-        case Voiture: return "Voiture";
-        case Train: return "Train";
-        case Avion: return "Avion";
-        case Bus: return "Bus";
-        case Metro: return "Metro";
-        case Tramway: return "Tramway";
-        case Velo: return "Velo";
-        case Scooter: return "Scooter";
-        case Taxi: return "Taxi";
-        case Pieds: return "Pieds";
-        case Tmax: return "Tmax";
-        case Monocycle: return "Monocycle";
-        case Velov: return "Velov";
-        case TukTuk: return "TukTuk";
-        case Planeur: return "Planeur";
-        case Quad: return "Quad";
-        case F1: return "F1";
-        case Cheval: return "Cheval";
-        case Tank: return "Tank";
-        case Teleporteur: return "Teleporteur";
-        case CampingCar: return "CampingCar";
-        
-        default: return "Pieds"; // Valeur par défaut (écologie avant tout :D)
-    }
+    return nomsTransport[transport];
 }
