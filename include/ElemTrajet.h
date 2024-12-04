@@ -18,8 +18,8 @@ public:
     virtual ~ElemTrajet();
 
     // Getters
-    ElemTrajet* getNext();
-    Trajet getTrajet();
+    ElemTrajet* GetNext();
+    Trajet GetTrajet();
 
     // Setters
     void setNext(ElemTrajet* next);

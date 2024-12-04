@@ -2,7 +2,6 @@
 #include "../include/Catalogue.h"
 #include <cstring>
 #include "Catalogue.h"
-#include "functions.h"
 
 using namespace std;
 
@@ -22,7 +21,7 @@ Catalogue::~Catalogue()
     ElemTrajet* current = liste_trajets;
     while (current != nullptr)
     {
-        ElemTrajet* next = current->getNext();
+        ElemTrajet* next = current->GetNext();
         delete current;
         current = next;
     }
@@ -46,10 +45,10 @@ void Catalogue::AjouterTrajet(Trajet t)
         ElemTrajet* current = liste_trajets;
 
         while (current != nullptr && 
-               (strcasecmp(new_elem->getTrajet().getDepart(), current->getTrajet().getDepart()) > 0))
+            (new_elem->GetTrajet().GetDepart() > current->GetTrajet().GetDepart()))
         {
             prev = current;
-            current = current->getNext();
+            current = current->GetNext();
         }
 
         if (prev == nullptr) // Insérer en tête
@@ -87,12 +86,12 @@ void Catalogue::AjouterTrajet()
     Ville v1 = GetVille(ville1);
     Ville v2 = GetVille(ville2);
 
-    if (v1 == UNKNOWN)
+    if (v1 == UNKNOWN_VILLE)
     {
         printf("Choisir la ville %s n'est pas possible.", ville2);
         return;
     }
-    else if (v2 == UNKNOWN)
+    else if (v2 == UNKNOWN_VILLE)
     {
         printf("Choisir la ville %s n'est pas possible.", ville2);
         return;
@@ -138,8 +137,8 @@ void Catalogue::AfficherCatalogue() const
 
     while (current)
     {
-        current->getTrajet().AfficherTrajet(index);
-        current = current->getNext();
+        current->GetTrajet().AfficherTrajet(index);
+        current = current->GetNext();
         index++;
     }
 }

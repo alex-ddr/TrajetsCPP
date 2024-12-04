@@ -3,7 +3,6 @@
 #define TRAJET_H
 
 #include "config.h"
-#include "functions.h"
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
