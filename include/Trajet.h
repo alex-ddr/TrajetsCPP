@@ -25,7 +25,7 @@ public:
     virtual ~Trajet();
 
     // Methodes
-    void AfficherTrajet(int index) const;
+    virtual void AfficherTrajet(int index) const;
 
     // Getters
     Ville GetDepart();
