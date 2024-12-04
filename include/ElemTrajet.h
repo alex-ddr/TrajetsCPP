@@ -13,7 +13,7 @@ protected:
 public:
     // Constructeur
     ElemTrajet();
-    ElemTrajet(Trajet* t);
+    ElemTrajet(Trajet** t);
 
     // Destructeur
     virtual ~ElemTrajet();

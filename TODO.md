@@ -5,15 +5,18 @@
   <li> Implémenter la classe Trajet composé
       <ul>
       <li> Implémenter la création d'un trajet composé à partir de plusieurs trajets simples
-      <li> Intégrer la liste chainée pour les trajets
+      <li> ✅ Intégrer la liste chainée pour les trajets composée 
       </ul>
-  <li> Implémenter la classe Trajet simple
+  <li> ✅ Implémenter la classe Trajet simple
 </ul>
 
 
 ## Main
 <ul>
-  <li> Implémenter la boucle while
+  <li> Boucle while
+    <li> ✅ Implémenter la boucle while
+    <li> Sécuriser les entrées mieux (gestion des caractères alphabet)
+
   <li> ✅ Créer un jeu de trajet de départ
 </ul>
   

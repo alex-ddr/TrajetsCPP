@@ -2,7 +2,6 @@
 #if ! defined ( Catalogue_H )
 #define Catalogue_H
 
-#include "Trajet.h"
 #include "../include/TS.h"
 #include "ElemTrajet.h"
 
@@ -14,6 +13,7 @@ protected:
 
     void CreerTrajetCompose();
     void CreerTrajetSimple();
+    void InitialiserCatalogue();
 public:
     // Constructeur
     Catalogue();
@@ -22,11 +22,10 @@ public:
     virtual ~Catalogue();
 
     // Methodes
-    void AjouterTrajet(Trajet t);
+    void AjouterTrajet(Trajet* t);
     void CreerTrajet();
-    void SupprimerTrajet(Trajet t);
+    void SupprimerTrajet(Trajet* t);
     void AfficherCatalogue() const;
-    void InitialiserCatalogue();
 };
 
 #endif // Catalogue_H
