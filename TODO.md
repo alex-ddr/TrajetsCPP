@@ -14,6 +14,6 @@
 ## Main
 <ul>
   <li> Implémenter la boucle while
-  <li> Créer un jeu de trajet de départ
+  <li> ✅ Créer un jeu de trajet de départ
 </ul>
   
