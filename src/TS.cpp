@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Trajet.h"
 #include "../include/TS.h"
 using namespace std;
 
@@ -9,14 +10,14 @@ TS::TS()
 {
 }
 
-TS::TS(const char* depart, const char* destination, char* transport):TS(depart, destination)
+TS::TS(const char* depart, const char* destination, char* trans):Trajet(depart, destination)
 {
-    this->transport = getDestination(transport);
+    this->trans = GetTransport(trans);
 }
 
-TS::TS(Ville depart, Ville destination, Destination destination):TS(depart, destination)
+TS::TS(Ville depart, Ville destination, Transport trans):Trajet(depart, destination)
 {
-    this->transport = transport;
+    this->trans = trans;
 }
 
 
@@ -27,19 +28,19 @@ TS::~TS ( )
 
 
 // Méthodes
-TS::GetTransport()
+Transport TS::GetTrans()
 {
-    return this->transport;
+    return this->trans;
 }
 
-TS::AfficherTrajet(int index) const
+void TS::AfficherTrajet(int index) const
 {
     TS::AfficherTrajet(index);
-    
-    if (transport == Velo || transprt = Velov || transport == Cheval || transport == Pieds)
+
+    if (trans == Velo || trans == Velov || trans == Cheval || trans == Pieds)
         cout << "à ";
     else
         cout << "en ";
 
-    cout << transport;
+    cout << trans << endl;
 }

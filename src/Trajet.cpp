@@ -30,7 +30,7 @@ Trajet::~Trajet ( )
 //-------------------------------------------------------------- PROTEGEES
 
 // Methodes
-virtual void Trajet::AfficherTrajet(int index) const
+void Trajet::AfficherTrajet(int index) const
 {
     cout << "Trajet n°" << index << " de " << GetNomVille(this->depart) << " à " << GetNomVille(this->destination);
 }

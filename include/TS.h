@@ -10,7 +10,7 @@
 class TS : public Trajet{
 protected:
     // Attributs
-    Transport transport;
+    Transport trans;
 
 public:
     // Constructeur
@@ -22,9 +22,9 @@ public:
     virtual ~TS();
 
     // Methodes
-    Transport GetTransport();
+    Transport GetTrans();
 
-    // void AfficherTS(int index) const;
+    void AfficherTrajet(int index) const;
 };
 
 
