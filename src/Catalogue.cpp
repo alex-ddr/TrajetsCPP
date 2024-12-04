@@ -44,8 +44,19 @@ void Catalogue::AjouterTrajet(Trajet t)
         ElemTrajet* prev = nullptr;
         ElemTrajet* current = liste_trajets;
 
+        // On classe par ordre alphabétique de ville de départ
         while (current != nullptr && 
             (new_elem->GetTrajet().GetDepart() > current->GetTrajet().GetDepart()))
+        {
+            prev = current;
+            current = current->GetNext();
+        }
+
+        // Si ils ont la même ville de départ
+        // On classe par ordre alphabétique de ville d'arrivée
+        while (current != nullptr && 
+            (new_elem->GetTrajet().GetDepart() == current->GetTrajet().GetDepart()) &&
+            (new_elem->GetTrajet().GetDestination() > current->GetTrajet().GetDestination()))
         {
             prev = current;
             current = current->GetNext();
