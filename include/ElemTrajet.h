@@ -7,19 +7,19 @@
 class ElemTrajet {
 protected:
     // Attributs
-    Trajet t;
+    Trajet* t;
     ElemTrajet* next;
 
 public:
     // Constructeur
-    ElemTrajet(Trajet t);
+    ElemTrajet(Trajet* t);
 
     // Destructeur
     virtual ~ElemTrajet();
 
     // Getters
     ElemTrajet* GetNext();
-    Trajet GetTrajet();
+    Trajet* GetTrajet();
 
     // Setters
     void setNext(ElemTrajet* next);

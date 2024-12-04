@@ -6,7 +6,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 // Constructeurs
-ElemTrajet::ElemTrajet(Trajet t)
+ElemTrajet::ElemTrajet(Trajet *t)
 {
     this->t = t;
     this->next = nullptr;
@@ -32,7 +32,7 @@ ElemTrajet* ElemTrajet::GetNext()
     return this->next;
 }
 
-Trajet ElemTrajet::GetTrajet()
+Trajet* ElemTrajet::GetTrajet()
 {
     return this->t;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
 
 #include "../include/Catalogue.h"
 
@@ -12,6 +13,15 @@ Catalogue::Catalogue()
 {
     nb_trajets = 0;
     liste_trajets = nullptr;
+    InitialiserCatalogue();
+}
+
+void Catalogue::InitialiserCatalogue()
+{
+    AjouterTrajet(new TS("Paris", "Marseille", "Avion"));
+    AjouterTrajet(new TS("Lyon", "Nice", "TukTuk"));
+    AjouterTrajet(new TS("Lille", "Toulon", "Tmax"));
+    AjouterTrajet(new TS("Strasbourg", "Metz", "Tank")); 
 }
 
 
@@ -19,19 +29,20 @@ Catalogue::Catalogue()
 Catalogue::~Catalogue()
 {
     ElemTrajet* current = liste_trajets;
-    while (current != nullptr)
-    {
+    while (current != nullptr) {
         ElemTrajet* next = current->GetNext();
-        delete current;
+        delete current->GetTrajet(); // Libère le trajet
+        delete current;             // Libère l'élément
         current = next;
     }
 }
 
 
+
 //-------------------------------------------------------------- PROTEGEES
 
 // Methodes
-void Catalogue::AjouterTrajet(Trajet t)
+void Catalogue::AjouterTrajet(Trajet *t)
 {
     ElemTrajet* new_elem = new ElemTrajet(t);
 
@@ -46,7 +57,7 @@ void Catalogue::AjouterTrajet(Trajet t)
 
         // On classe par ordre alphabétique de ville de départ
         while (current != nullptr && 
-            (new_elem->GetTrajet().GetDepart() > current->GetTrajet().GetDepart()))
+            ((*new_elem->GetTrajet()).GetDepart() > (*current->GetTrajet()).GetDepart()))
         {
             prev = current;
             current = current->GetNext();
@@ -55,8 +66,8 @@ void Catalogue::AjouterTrajet(Trajet t)
         // Si ils ont la même ville de départ
         // On classe par ordre alphabétique de ville d'arrivée
         while (current != nullptr && 
-            (new_elem->GetTrajet().GetDepart() == current->GetTrajet().GetDepart()) &&
-            (new_elem->GetTrajet().GetDestination() > current->GetTrajet().GetDestination()))
+            ((*new_elem->GetTrajet()).GetDepart() == (*current->GetTrajet()).GetDepart()) &&
+            ((*new_elem->GetTrajet()).GetDestination() > (*current->GetTrajet()).GetDestination()))
         {
             prev = current;
             current = current->GetNext();
@@ -79,66 +90,74 @@ void Catalogue::AjouterTrajet(Trajet t)
 
 void Catalogue::CreerTrajet()
 {
-    cout << "------------------------------------\n";
+    cout << "-------------------------------------------------\n";
     cout << "Voulez vous ajouter un trajet simple ou composé ?\n\t1. Trajet simple\n\t2. Trajet composé\n";
 
     int choice;
     cin >> choice;
-    if (choice == 0)
+
+    while (cin.fail() || (choice != 1 && choice != 2))
     {
-        CreerTrajetSimple();
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+        cout << "--------------------------------------------\n";
+        cout << "Vous devez choisir une valeur entre 1 et 2 !\n\t1. Trajet simple\n\t2. Trajet composé\n";
+
+        cin >> choice; 
     }
-    else
-    {
+
+    if (choice == 1) {
+        CreerTrajetSimple();
+    } else {
         CreerTrajetCompose();
     }
 }
 
+
 void Catalogue::CreerTrajetSimple()
 {
-    // Déclare des buffers pour lire les entrées utilisateur
     char ville1_buffer[100];
     char ville2_buffer[100];
     char transport_buffer[100];
 
-    // Lire les entrées utilisateur dans les buffers
     cout << "Entrez la première ville : ";
     cin >> ville1_buffer;
     const char* ville1 = ville1_buffer;
+    Ville v1 = GetVille(ville1);
+     if (v1 == UNKNOWN_VILLE)
+    {
+        cout << "Choisir la ville " << ville1 << " n'est pas possible."; 
+        return;
+    }
 
     cout << "Entrez la deuxième ville : ";
     cin >> ville2_buffer;
     const char* ville2 = ville2_buffer;
-
-    cout << "Entrez le moyen de transport : ";
-    cin >> transport_buffer;
-    const char* transport = transport_buffer;
-
-    Ville v1 = GetVille(ville1);
     Ville v2 = GetVille(ville2);
-    Transport t = GetTransport(transport);
-
-    if (v1 == UNKNOWN_VILLE)
-    {
-        cout << "Choisir la ville " << ville2 << " n'est pas possible."; 
-        return;
-    }
-    else if (v2 == UNKNOWN_VILLE)
+    if (v2 == UNKNOWN_VILLE)
     {
         cout << "Choisir la ville " << ville2 << " n'est pas possible.";      
         return;
     }
-    
+
+    cout << "Entrez le moyen de transport : ";
+    cin >> transport_buffer;
+    const char* transport = transport_buffer;
+    Transport t = GetTransport(transport);
+
     if (t ==  UNKNOWN_TRANSPORT)
     {
         cout << "Choisir le transport "<< transport << " n'est pas possible.";
         return;
     }
 
-    TS traj(v1, v2, t);
-
-    this->AjouterTrajet(traj);
+    TS* tr = new TS(v1, v2, t);
+    this->AjouterTrajet(tr);
 }
+
 
 void Catalogue::CreerTrajetCompose()
 {
@@ -146,13 +165,7 @@ void Catalogue::CreerTrajetCompose()
 }
 
 
-void Catalogue::InitialiserCatalogue()
-{
-    AjouterTrajet(Trajet("Paris", "Marseille"));
-    AjouterTrajet(Trajet("Lyon", "Nice"));
-    AjouterTrajet(Trajet("Strasbourg", "Metz")); 
-    AjouterTrajet(Trajet("Lille", "Toulon"));
-}
+
 
 
 // void Catalogue::SupprimerTrajet(Trajet t)
@@ -181,7 +194,7 @@ void Catalogue::AfficherCatalogue() const
 
     while (current)
     {
-        current->GetTrajet().AfficherTrajet(index);
+        (*current->GetTrajet()).AfficherTrajet(index);
         current = current->GetNext();
         index++;
     }

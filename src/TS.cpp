@@ -9,7 +9,7 @@ TS::TS()
 {
 }
 
-TS::TS(const char* depart, const char* destination, char* trans):Trajet(depart, destination)
+TS::TS(const char* depart, const char* destination, const char* trans):Trajet(depart, destination)
 {
     this->trans = GetTransport(trans);
 }

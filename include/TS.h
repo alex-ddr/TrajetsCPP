@@ -18,7 +18,7 @@ protected:
 public:
     // Constructeur
     TS();
-    TS(const char* depart, const char* destination, char* transport);
+    TS(const char* depart, const char* destination, const char* transport);
     TS(Ville depart, Ville destination, Transport transport);
 
     // Destructeur
