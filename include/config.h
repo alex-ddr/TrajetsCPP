@@ -42,7 +42,8 @@ enum Ville {
   Toulon,
   Toulouse,
   Tours,
-  Villeurbanne
+  Villeurbanne,
+  UNKNOWN
 };
 
 const char* nomsVille[] = {
@@ -108,7 +109,7 @@ enum Transport {
   Cheval,
   Tank,
   Teleporteur,
-  CampingCar
+  CampingCar,
 };
 
 const char* nomsTransport[] = {

@@ -17,11 +17,6 @@ public:
     // Destructeur
     virtual ~ElemTrajet();
 
-    // Methodes
-    void Afficher();
-    void Inserer(Trajet t);
-    void Supprimer(Trajet t);
-
     // Getters
     ElemTrajet* getNext();
     Trajet getTrajet();

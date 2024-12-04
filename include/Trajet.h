@@ -3,6 +3,7 @@
 #define TRAJET_H
 
 #include "config.h"
+#include "functions.h"
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
@@ -12,13 +13,14 @@
 class Trajet {
 protected:
     // Attributs
-    const char* depart;
-    const char* destination;
+    Ville depart;
+    Ville destination;
 
 public:
     // Constructeur
     Trajet();
     Trajet(const char* depart, const char* destination);
+    Trajet(Ville depart, Ville destination);
 
     // Destructeur
     virtual ~Trajet();
@@ -27,8 +29,8 @@ public:
     void AfficherTrajet(int index) const;
 
     // Getters
-    const char* getDepart();
-    const char* getDestination();
+    Ville GetDepart();
+    Ville GetDestination();
 };
 
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/ElemTrajet.h"
+#include "ElemTrajet.h"
 using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
@@ -41,4 +42,3 @@ void ElemTrajet::setNext(ElemTrajet* next)
 {
     this->next = next;
 }
-

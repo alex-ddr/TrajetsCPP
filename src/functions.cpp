@@ -42,7 +42,7 @@ Ville GetVille(const char* nomVille) {
     if (strcasecmp(nomVille, "Tours") == 0) return Tours;
     if (strcasecmp(nomVille, "Villeurbanne") == 0) return Villeurbanne;
 
-    return Paris; // Ville par défaut (capitale !)
+    return UNKNOWN; // Si la ville n'est pas trouvée
 }
 
 const char* GetNomVille(Ville ville) {

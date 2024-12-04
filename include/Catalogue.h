@@ -20,8 +20,10 @@ public:
 
     // Methodes
     void AjouterTrajet(Trajet t);
+    void AjouterTrajet();
+    void SupprimerTrajet(Trajet t);
     void AfficherCatalogue() const;
+    void InitialiserCatalogue();
 };
-
 
 #endif // Catalogue_H
