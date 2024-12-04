@@ -23,8 +23,8 @@ public:
     void Supprimer(Trajet t);
 
     // Getters
-    ElemTrajet* getNext();
-    Trajet getTrajet();
+    ElemTrajet* GetNext();
+    Trajet GetTrajet();
 
     // Setters
     void setNext(ElemTrajet* next);

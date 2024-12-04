@@ -26,12 +26,12 @@ ElemTrajet::~ElemTrajet ( )
 // Methodes
 
 // Getters
-ElemTrajet* ElemTrajet::getNext()
+ElemTrajet* ElemTrajet::GetNext()
 {
     return this->next;
 }
 
-Trajet ElemTrajet::getTrajet()
+Trajet ElemTrajet::GetTrajet()
 {
     return this->t;
 }
