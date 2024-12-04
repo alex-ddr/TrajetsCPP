@@ -6,7 +6,13 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 // Constructeurs
-ElemTrajet::ElemTrajet(Trajet t)
+ElemTrajet::ElemTrajet()
+{
+    this->t = nullptr;
+    this->next = nullptr;
+}
+
+ElemTrajet::ElemTrajet(Trajet* t)
 {
     this->t = t;
     this->next = nullptr;
@@ -32,13 +38,13 @@ ElemTrajet* ElemTrajet::GetNext()
     return this->next;
 }
 
-Trajet ElemTrajet::GetTrajet()
+Trajet* ElemTrajet::GetTrajet()
 {
     return this->t;
 }
 
 // Setters
-void ElemTrajet::setNext(ElemTrajet* next)
+void ElemTrajet::SetNext(ElemTrajet* elem)
 {
-    this->next = next;
+    this->next = elem;
 }

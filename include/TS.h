@@ -3,8 +3,6 @@
 #define TS_H
 #include "Trajet.h"
 
-#include "Trajet.h"
-
 //------------------------------------------------------------------------
 // Rôle de la classe <TS>
 // Cette classe représente un trajet simple.
@@ -18,7 +16,7 @@ protected:
 public:
     // Constructeur
     TS();
-    TS(const char* depart, const char* destination, char* transport);
+    TS(const char* depart, const char* destination, const char* transport);
     TS(Ville depart, Ville destination, Transport transport);
 
     // Destructeur

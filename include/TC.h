@@ -3,6 +3,7 @@
 #define TC_H
 
 #include "../include/TS.h"
+#include "../include/ElemTrajet.h"
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TC>
@@ -12,7 +13,10 @@
 class TC : public Trajet{
 protected:
     // Attributs
-    Transport transport;
+    ElemTrajet* TS_list;
+
+    // Methodes
+    ElemTrajet* CreerListe(Ville depart, Ville destination);
 
 public:
     // Constructeur
@@ -24,7 +28,6 @@ public:
     virtual ~TC();
 
     // Methodes
-
     void AfficherTrajet(int index) const;
 };
 
