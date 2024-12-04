@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Trajet.h"
 #include "../include/TS.h"
 using namespace std;
 
@@ -35,12 +34,12 @@ Transport TS::GetTrans()
 
 void TS::AfficherTrajet(int index) const
 {
-    TS::AfficherTrajet(index);
+    Trajet::AfficherTrajet(index);
 
     if (trans == Velo || trans == Velov || trans == Cheval || trans == Pieds)
-        cout << "à ";
+        cout << " à ";
     else
-        cout << "en ";
+        cout << " en ";
 
-    cout << trans << endl;
+    cout << GetNomTransport(trans) << endl;
 }
