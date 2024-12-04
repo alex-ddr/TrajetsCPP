@@ -2,7 +2,7 @@
 #if ! defined ( Catalogue_H )
 #define Catalogue_H
 
-#include "../include/TS.h"
+#include "../include/TC.h"
 #include "ElemTrajet.h"
 
 class Catalogue {

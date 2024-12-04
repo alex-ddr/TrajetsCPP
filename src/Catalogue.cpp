@@ -75,13 +75,13 @@ void Catalogue::AjouterTrajet(Trajet *t)
 
         if (prev == nullptr) // Insérer en tête
         {
-            new_elem->setNext(liste_trajets);
+            new_elem->SetNext(liste_trajets);
             liste_trajets = new_elem;
         }
         else // Insérer entre prev et current
         {
-            prev->setNext(new_elem);
-            new_elem->setNext(current);
+            prev->SetNext(new_elem);
+            new_elem->SetNext(current);
         }
     }
 
@@ -95,18 +95,15 @@ void Catalogue::CreerTrajet()
 
     int choice;
     cin >> choice;
+    ClearScreen();
 
     while (cin.fail() || (choice != 1 && choice != 2))
     {
-        #ifdef _WIN32
-            system("cls");
-        #else
-            system("clear");
-        #endif
         cout << "--------------------------------------------\n";
         cout << "Vous devez choisir une valeur entre 1 et 2 !\n\t1. Trajet simple\n\t2. Trajet composé\n";
 
-        cin >> choice; 
+        cin >> choice;
+        ClearScreen();
     }
 
     if (choice == 1) {
@@ -123,17 +120,17 @@ void Catalogue::CreerTrajetSimple()
     char ville2_buffer[100];
     char transport_buffer[100];
 
-    cout << "Entrez la première ville : ";
+    cout << "Entrez la ville de départ : ";
     cin >> ville1_buffer;
     const char* ville1 = ville1_buffer;
     Ville v1 = GetVille(ville1);
-     if (v1 == UNKNOWN_VILLE)
+    if (v1 == UNKNOWN_VILLE)
     {
         cout << "Choisir la ville " << ville1 << " n'est pas possible."; 
         return;
     }
 
-    cout << "Entrez la deuxième ville : ";
+    cout << "Entrez la ville d'arrivée : ";
     cin >> ville2_buffer;
     const char* ville2 = ville2_buffer;
     Ville v2 = GetVille(ville2);
@@ -161,7 +158,32 @@ void Catalogue::CreerTrajetSimple()
 
 void Catalogue::CreerTrajetCompose()
 {
-    // à implémenter
+        char ville1_buffer[100];
+    char ville2_buffer[100];
+    char transport_buffer[100];
+
+    cout << "Entrez la ville de départ : ";
+    cin >> ville1_buffer;
+    const char* ville1 = ville1_buffer;
+    Ville v1 = GetVille(ville1);
+     if (v1 == UNKNOWN_VILLE)
+    {
+        cout << "Choisir la ville " << ville1 << " n'est pas possible."; 
+        return;
+    }
+
+    cout << "Entrez la destination : ";
+    cin >> ville2_buffer;
+    const char* ville2 = ville2_buffer;
+    Ville v2 = GetVille(ville2);
+    if (v2 == UNKNOWN_VILLE)
+    {
+        cout << "Choisir la ville " << ville2 << " n'est pas possible.";      
+        return;
+    }
+
+    TC* tr = new TC(v1, v2);
+    this->AjouterTrajet(tr);
 }
 
 

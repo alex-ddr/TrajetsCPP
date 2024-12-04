@@ -147,3 +147,14 @@ Transport GetTransport(const char* nomTransport) {
 const char* GetNomTransport(Transport transport) {
     return nomsTransport[transport];
 }
+
+ // Pour la fonction system()
+
+void ClearScreen()
+{
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}

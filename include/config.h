@@ -1,6 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <cstdlib>
+
 enum Ville {
   AixEnProvence,
   Amiens,
@@ -78,4 +80,5 @@ extern const char* nomsTransport[];
 Transport GetTransport(const char* nomTransport);
 const char* GetNomTransport(Transport transport);
 
+void ClearScreen();
 #endif // CONFIG_H

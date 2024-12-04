@@ -12,7 +12,7 @@ ElemTrajet::ElemTrajet()
     this->next = nullptr;
 }
 
-ElemTrajet::ElemTrajet(Trajet* *t)
+ElemTrajet::ElemTrajet(Trajet* t)
 {
     this->t = t;
     this->next = nullptr;

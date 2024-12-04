@@ -2,53 +2,82 @@
 #include "../include/TC.h"
 using namespace std;
 
-//--------------------------------------------------------------- PROTEGEE
+//---------------------------------------------------------------- PROTEGE
 
 ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
 {
-    // Création du premier trajet de ville de départ : depart
-    cout << "Trajet n°1 :\n   - Ville de départ : " << GetNomVille(depart) << "\n   - Ville d'arrivée : ";
-    char* first_dest = new char[100];
-    cin >> first_dest;
+    int index = 1;
+    ElemTrajet* FirstElem = nullptr;
+    ElemTrajet* prev = nullptr;
 
-    char* first_trans = new char[100];
-    cout << "   - Moyen de transport : ";
-    cin >> first_trans;
-    ElemTrajet* FirstElem = new ElemTrajet(new TS(depart, GetVille(first_dest), GetTransport(first_trans)));
-    
-    
-    // Création du reste des trajets
-    int index = 2;
-    ElemTrajet* prev = FirstElem;
-    ElemTrajet* current;
-    char* current_depart = new char[100];
-    char* current_dest = new char[100];
-    char* current_trans = new char[100];
+    string current_depart, current_dest, current_trans;
+    Ville villeDep = depart, villeDest;
+    Transport trans;
 
     do
     {
-        cout << "\n\nTrajet n°" << index++ << " :\n   - Ville de départ : ";
-        do cin >> current_depart;
-        while (GetVille(current_depart) == UNKNOWN_VILLE);
+        cout << "\n\nEscale n°" << index << " :\n";
 
-        cout << "   - Ville d'arrivée : ";
-        do cin >> current_dest;
-        while (GetVille(current_dest) == UNKNOWN_VILLE);
+        // Affichage du premier départ
+        if (index == 1)
+            cout << "   - Ville de départ : " << GetNomVille(depart) << "\n";
+        // Entrée de current_depart
+        else
+        {
+            do
+            {
+                cout << "   - Ville de départ : ";
+                cin >> current_depart;
+                villeDep = GetVille(current_depart.c_str());
 
-        cout << "   - Moyen de Transport : ";
-        do cin >> current_trans;
-        while (GetTransport(current_trans) == UNKNOWN_TRANSPORT);
+                if (villeDep == UNKNOWN_VILLE)
+                    cout << "\nVille inconnue. Veuillez réessayer : \n";
+                else if (villeDep != prev->GetTrajet()->GetDestination())
+                    cout << "\nLa ville ne correspond pas à la destination précédente. Veuillez réessayer : \n";
+            }
+            while ((villeDep == UNKNOWN_VILLE) || (villeDep != prev->GetTrajet()->GetDestination()));
+        }
 
-        current = new ElemTrajet(new TS(GetVille(current_depart), GetVille(current_dest), GetTransport(current_trans)));
-        prev->SetNext(current);
-        prev = current;
-    }
-    while (GetVille(current_dest) != destination);
+        // Entrée de current_dest
+        do
+        {
+            cout << "   - Ville d'arrivée : ";
+            cin >> current_dest;
+            villeDest = GetVille(current_dest.c_str());
 
-    current->SetNext(nullptr);
+            if (villeDest == UNKNOWN_VILLE)
+                cout << "\nVille inconnue. Veuillez réessayer : \n";
+        }
+        while (villeDest == UNKNOWN_VILLE);
 
+        // Entrée de current_trans
+        do
+        {
+            cout << "   - Moyen de Transport : ";
+            cin >> current_trans;
+            trans = GetTransport(current_trans.c_str());
+
+            if (trans == UNKNOWN_TRANSPORT)
+                cout << "\nMoyen de transport inconnu. Veuillez réessayer : \n";
+        }
+        while (trans == UNKNOWN_TRANSPORT);
+
+        // Création du trajet
+        ElemTrajet* current = new ElemTrajet(new TS(villeDep, villeDest, trans));
+
+        if (index == 1)
+            FirstElem = current;
+        else
+            prev->SetNext(current);
+
+        prev = current; // Mise à jour du pointeur précédent
+        index++;
+    } while (villeDest != destination);
+
+    if (prev) prev->SetNext(nullptr); // Dernier élément de la liste
     return FirstElem;
 }
+
 
 
 
