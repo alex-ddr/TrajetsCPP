@@ -113,7 +113,8 @@ const char* nomsTransport[] = {
   "Cheval",
   "Tank",
   "Teleporteur",
-  "CampingCar"
+  "CampingCar",
+  "Pédalo"
 };
 
 Transport GetTransport(const char* nomTransport) {
@@ -138,6 +139,7 @@ Transport GetTransport(const char* nomTransport) {
     if (strcasecmp(nomTransport, "Tank") == 0) return Tank;
     if (strcasecmp(nomTransport, "Teleporteur") == 0) return Teleporteur;
     if (strcasecmp(nomTransport, "CampingCar") == 0) return CampingCar;
+    if (strcasecmp(nomTransport, "Pédalo") == 0) return Pedalo;
 
     return UNKNOWN_TRANSPORT; // Transport non troouvé
 }

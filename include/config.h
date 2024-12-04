@@ -70,6 +70,7 @@ enum Transport {
   Tank,
   Teleporteur,
   CampingCar,
+  Pedalo,
   UNKNOWN_TRANSPORT
 };
 
