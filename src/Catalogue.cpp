@@ -93,11 +93,11 @@ void Catalogue::CreerTrajet()
     cout << "-------------------------------------------------\n";
     cout << "Voulez vous ajouter un trajet simple ou composé ?\n\t1. Trajet simple\n\t2. Trajet composé\n";
 
-    int choice;
+    char choice;
     cin >> choice;
     ClearScreen();
 
-    while (cin.fail() || (choice != 1 && choice != 2))
+    while (cin.fail() || (choice != '1' && choice != '2'))
     {
         cout << "--------------------------------------------\n";
         cout << "Vous devez choisir une valeur entre 1 et 2 !\n\t1. Trajet simple\n\t2. Trajet composé\n";
