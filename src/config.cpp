@@ -1,5 +1,7 @@
 #include "../include/config.h"
 #include <cstring>
+#include <iostream>
+using namespace std;
 
 const char* nomsVille[] = {
   "AixEnProvence",
@@ -157,4 +159,62 @@ void ClearScreen()
     #else
         system("clear");
     #endif
+}
+
+void AfficherVilles(int ask)
+{
+    if (ask)
+    {
+        cout << "Voulez-vous afficher la liste des villes ? (o/n) : ";
+        char choice;
+
+        do
+        {
+            cin >> choice;
+            if (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N')
+            {
+                ClearScreen();
+                cout << "Voulez-vous afficher la liste des villes ? (o/n) : ";
+            }
+        }
+        while (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N');
+
+        if (choice == 'n' || choice == 'N') return;
+    }
+
+    cout << "Liste des villes :\n" << endl;
+    for (int i = 0; i < UNKNOWN_VILLE; i++)
+        cout << i + 1 << ". " << GetNomVille((Ville)i) << endl;
+
+    cout << "\n";
+}
+
+void AfficherTransports(int ask)
+{
+    if (ask)
+    {
+        cout << "Voulez-vous afficher les modes de transport ? (o/n) : ";
+        char choice;
+
+        do
+        {
+            cin >> choice;
+            cin.ignore();
+            if (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N')
+            {
+                ClearScreen();
+                cout << choice << endl;
+                cout << "Voulez-vous afficher les modes de transport ? (o/n) : ";
+            }
+        }
+        while (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N');
+
+        if (choice == 'n' || choice == 'N') return;
+    }
+
+    cout << "Liste des modes de transport :\n" << endl;
+    for (int i = 0; i < UNKNOWN_TRANSPORT; i++)
+        cout << i + 1 << ". " << GetNomTransport((Transport)i) << endl;
+    
+    cout << "\n";
 }

@@ -116,73 +116,99 @@ void Catalogue::CreerTrajet()
 
 void Catalogue::CreerTrajetSimple()
 {
-    char ville1_buffer[100];
-    char ville2_buffer[100];
+    char ville1_buffer[100], ville2_buffer[100];
+    Ville ville1, ville2;
     char transport_buffer[100];
+    Transport trans;
 
-    cout << "Entrez la ville de départ : ";
-    cin >> ville1_buffer;
-    const char* ville1 = ville1_buffer;
-    Ville v1 = GetVille(ville1);
-    if (v1 == UNKNOWN_VILLE)
+
+    do
     {
-        cout << "Choisir la ville " << ville1 << " n'est pas possible."; 
-        return;
-    }
+        cout << "   - Ville de départ : ";
+        cin >> ville1_buffer;
+        ville1 = GetVille(ville1_buffer);
 
-    cout << "Entrez la ville d'arrivée : ";
-    cin >> ville2_buffer;
-    const char* ville2 = ville2_buffer;
-    Ville v2 = GetVille(ville2);
-    if (v2 == UNKNOWN_VILLE)
+        if (ville1 == UNKNOWN_VILLE)
+            {
+                cout << "\nVille inconnue.\n";
+                AfficherVilles(1);
+            }
+    }
+    while (ville1 == UNKNOWN_VILLE);
+
+    
+    do
     {
-        cout << "Choisir la ville " << ville2 << " n'est pas possible.";      
-        return;
+        cout << "   - Destination : ";
+        cin >> ville2_buffer;
+        ville2 = GetVille(ville2_buffer);
+
+        if (ville2 == UNKNOWN_VILLE)
+            {
+                cout << "\nVille inconnue.\n";
+                AfficherVilles(1);
+            }
+        else if (ville2 == ville1)
+            cout << "\nLa destination doit être différente de la ville de départ, Veuillez réessayer : \n";
     }
+    while ((ville2 == UNKNOWN_VILLE) || (ville2 == ville1));
 
-    cout << "Entrez le moyen de transport : ";
-    cin >> transport_buffer;
-    const char* transport = transport_buffer;
-    Transport t = GetTransport(transport);
-
-    if (t ==  UNKNOWN_TRANSPORT)
+    do
     {
-        cout << "Choisir le transport "<< transport << " n'est pas possible.";
-        return;
-    }
+        cout << "   - Moyen de transport : ";
+        cin >> transport_buffer;
+        trans = GetTransport(transport_buffer);
 
-    TS* tr = new TS(v1, v2, t);
+        if (trans == UNKNOWN_TRANSPORT)
+            {
+                cout << "\n Moyen de transport inconnu.\n";
+                AfficherTransports(1);
+            }
+    }
+    while (trans == UNKNOWN_TRANSPORT);
+
+    TS* tr = new TS(ville1, ville2, trans);
     this->AjouterTrajet(tr);
 }
 
 
 void Catalogue::CreerTrajetCompose()
 {
-        char ville1_buffer[100];
-    char ville2_buffer[100];
-    char transport_buffer[100];
+    char ville1_buffer[100], ville2_buffer[100];
+    Ville ville1, ville2;
 
-    cout << "Entrez la ville de départ : ";
-    cin >> ville1_buffer;
-    const char* ville1 = ville1_buffer;
-    Ville v1 = GetVille(ville1);
-     if (v1 == UNKNOWN_VILLE)
+    do
     {
-        cout << "Choisir la ville " << ville1 << " n'est pas possible."; 
-        return;
-    }
+        cout << "   - Ville de départ : ";
+        cin >> ville1_buffer;
+        ville1 = GetVille(ville1_buffer);
 
-    cout << "Entrez la destination : ";
-    cin >> ville2_buffer;
-    const char* ville2 = ville2_buffer;
-    Ville v2 = GetVille(ville2);
-    if (v2 == UNKNOWN_VILLE)
+        if (ville1 == UNKNOWN_VILLE)
+            {
+                cout << "\nVille inconnue.\n";
+                AfficherVilles(1);
+            }
+    }
+    while (ville1 == UNKNOWN_VILLE);
+
+    
+    do
     {
-        cout << "Choisir la ville " << ville2 << " n'est pas possible.";      
-        return;
-    }
+        cout << "   - Destination : ";
+        cin >> ville2_buffer;
+        ville2 = GetVille(ville2_buffer);
 
-    TC* tr = new TC(v1, v2);
+        if (ville2 == UNKNOWN_VILLE)
+            {
+                cout << "\nVille inconnue.\n";
+                AfficherVilles(1);
+            }
+        else if (ville2 == ville1)
+            cout << "\nLa destination doit être différente de la ville de départ, Veuillez réessayer : \n";
+    }
+    while ((ville2 == UNKNOWN_VILLE) || (ville2 == ville1));
+
+    TC* tr = new TC(ville1, ville2);
     this->AjouterTrajet(tr);
 }
 

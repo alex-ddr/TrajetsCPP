@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #include <cstdlib>
+#include <cstring>
 
 enum Ville {
   AixEnProvence,
@@ -81,4 +82,7 @@ Transport GetTransport(const char* nomTransport);
 const char* GetNomTransport(Transport transport);
 
 void ClearScreen();
+void AfficherVilles(int ask);
+void AfficherTransports(int ask);
+
 #endif // CONFIG_H

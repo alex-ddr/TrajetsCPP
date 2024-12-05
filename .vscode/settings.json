@@ -4,6 +4,8 @@
     "cstdlib": "cpp",
     "ios": "cpp",
     "istream": "cpp",
-    "limits": "cpp"
+    "limits": "cpp",
+    "cstring": "cpp",
+    "ostream": "cpp"
   }
 }

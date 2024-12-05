@@ -10,12 +10,15 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
     ElemTrajet* FirstElem = nullptr;
     ElemTrajet* prev = nullptr;
 
-    string current_depart, current_dest, current_trans;
+    char current_depart[100], current_dest[100], current_trans[100];
     Ville villeDep = depart, villeDest;
     Transport trans;
 
     do
     {
+        ClearScreen();
+        cout << "Trajet " << GetNomVille(depart) << " -> " << GetNomVille(destination) << " :\n";
+        
         cout << "\n\nEscale n°" << index << " :\n";
 
         // Affichage du premier départ
@@ -28,10 +31,13 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
             {
                 cout << "   - Ville de départ : ";
                 cin >> current_depart;
-                villeDep = GetVille(current_depart.c_str());
+                villeDep = GetVille(current_depart);
 
                 if (villeDep == UNKNOWN_VILLE)
-                    cout << "\nVille inconnue. Veuillez réessayer : \n";
+                {
+                    cout << "\nVille inconnue.\n";
+                    AfficherVilles(1);
+                }
                 else if (villeDep != prev->GetTrajet()->GetDestination())
                     cout << "\nLa ville ne correspond pas à la destination précédente. Veuillez réessayer : \n";
             }
@@ -43,10 +49,13 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
         {
             cout << "   - Ville d'arrivée : ";
             cin >> current_dest;
-            villeDest = GetVille(current_dest.c_str());
+            villeDest = GetVille(current_dest);
 
             if (villeDest == UNKNOWN_VILLE)
-                cout << "\nVille inconnue. Veuillez réessayer : \n";
+                {
+                    cout << "\nVille inconnue.\n";
+                    AfficherVilles(1);
+                }
         }
         while (villeDest == UNKNOWN_VILLE);
 
@@ -55,10 +64,14 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
         {
             cout << "   - Moyen de Transport : ";
             cin >> current_trans;
-            trans = GetTransport(current_trans.c_str());
+            trans = GetTransport(current_trans);
 
             if (trans == UNKNOWN_TRANSPORT)
-                cout << "\nMoyen de transport inconnu. Veuillez réessayer : \n";
+            {
+                cout << "\nMoyen de transport inconnu.\n";
+                AfficherTransports(1);
+            }
+
         }
         while (trans == UNKNOWN_TRANSPORT);
 
