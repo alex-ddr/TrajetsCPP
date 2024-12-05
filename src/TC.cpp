@@ -88,6 +88,7 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
     } while (villeDest != destination);
 
     if (prev) prev->SetNext(nullptr); // Dernier élément de la liste
+    this->nb_escales = index;
     return FirstElem;
 }
 
@@ -123,5 +124,13 @@ TC::~TC()
 // Méthodes
 void TC::AfficherTrajet(int index) const
 {
-    Trajet::AfficherTrajet(index);
+    cout << "Trajet composé n°" << index << " de " << GetNomVille(depart) << " à " << GetNomVille(destination) << " en " << nb_escales << " escales :\n";
+    ElemTrajet* copie = TS_list;
+    int i = 1;
+    while(copie->GetNext())
+    {
+        cout << "\t- ";
+        copie->GetTrajet()->AfficherTrajet(i);
+        copie= copie->GetNext();
+    }
 }

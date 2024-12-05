@@ -271,28 +271,6 @@ void Catalogue::CreerTrajetCompose()
     this->AjouterTrajet(tr);
 }
 
-
-
-
-
-// void Catalogue::SupprimerTrajet(Trajet t)
-// {   
-//     ElemTrajet* prev = nullptr;
-//     ElemTrajet* next = nullptr;
-//     if (liste_trajets == nullptr)
-//     {
-//         return;
-//     }
-
-//     ElemTrajet* copy = liste_trajets;
-//     while(copy != nullptr && copy->getTrajet())
-//     {
-//         prev = copy;
-//         copy = copy->getNext();
-//         next = copy->getNext();
-//     }
-// }
-
 void Catalogue::AfficherCatalogue() const
 {
     cout << "Catalogue de " << nb_trajets << " trajets :\n\n";
@@ -302,6 +280,7 @@ void Catalogue::AfficherCatalogue() const
     while (current)
     {
         (*current->GetTrajet()).AfficherTrajet(index);
+        cout << "-----------------------------------------------------\n";
         current = current->GetNext();
         index++;
     }

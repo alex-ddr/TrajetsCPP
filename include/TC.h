@@ -14,6 +14,7 @@ class TC : public Trajet{
 protected:
     // Attributs
     ElemTrajet* TS_list;
+    int nb_escales;
 
     // Methodes
     ElemTrajet* CreerListe(Ville depart, Ville destination);
