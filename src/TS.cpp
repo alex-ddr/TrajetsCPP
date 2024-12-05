@@ -37,9 +37,9 @@ void TS::AfficherTrajet(int index) const
     Trajet::AfficherTrajet(index);
 
     if (trans == Velo || trans == Velov || trans == Cheval || trans == Pieds)
-        cout << " à ";
+        cout << " -> ";
     else
-        cout << " en ";
+        cout << " || ";
 
     cout << GetNomTransport(trans) << endl;
 }

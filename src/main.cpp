@@ -21,14 +21,14 @@ int main() {
         }
 
 
-        cout << "\n\t~~~~~~~~~~~ Menu ~~~~~~~~~~~\nEntrez votre choix :\n\t0. Afficher le catalogue\n\t1. Afficher les villes disponibles\n\t2. Ajouter un trajet au catalogue\n\t3. Supprimer un trajet du catalogue\n\t4. Quitter\n";
+        cout << "\n\t~~~~~~~~~~~ Menu ~~~~~~~~~~~\nEntrez votre choix :\n\t1. Afficher le catalogue\n\t2. Afficher les villes disponibles\n\t3. Ajouter un trajet au catalogue\n\t4. Rechercher un trajet\n\t5. Supprimer un trajet du catalogue\n\t6. Quitter\n";
         cout << "Votre choix : ";
         cin >> choice;
         // Si l'entrée est invalide
         
         ClearScreen();
 
-        if (!((int)choice >= 48 && (int)choice <= 52)) {
+        if (!((int)choice >= '1' && (int)choice <= '6')) {
             cout << "\n--------------------/!\\------------------\n";
             cout << "Erreur : vous devez choisir une valeur entre 0 et 4 !\n";
             cin.clear();
@@ -39,25 +39,28 @@ int main() {
         }
 
         switch (choice) {
-            case '0': // Afficher
+            case '1': // Afficher
                 c.AfficherCatalogue();
                 break;
-            case '1': // Créer
+            case '2': // Créer
                 AfficherVilles(0);
                 break;
-            case '2':
+            case '3':
                 c.CreerTrajet();
                 break;
-            case '3': // Supprimer
+            case '4':
+                c.RechercherTrajet();
+                break;
+            case '5': // Supprimer
                 c.SupprimerTrajet();
                 break;
-            case '4': // Quitter
+            case '6': // Quitter
                 cout << "\n\t~~~~~~~~~~~ A bientôt! ~~~~~~~~~~~\n";
                 exit(EXIT_SUCCESS);
                 break;
         }
 
-        cout << "\n\nAppuyez sur Entrée pour revenir au menu...";
+        cout << "\nAppuyez sur Entrée pour revenir au menu...";
         cin.ignore();
         cin.get();
     } while(1);

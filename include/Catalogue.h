@@ -26,6 +26,9 @@ public:
     void CreerTrajet();
     void SupprimerTrajet();
     void AfficherCatalogue() const;
+    int Backtrack(Ville v1, Ville v2, Ville visite);
+    void RechercherTrajet() const;
+    
 };
 
 #endif // Catalogue_H

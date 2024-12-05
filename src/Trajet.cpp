@@ -32,7 +32,7 @@ Trajet::~Trajet ( )
 // Methodes
 void Trajet::AfficherTrajet(int index) const
 {
-    cout << "Trajet n°" << index << " de " << GetNomVille(this->depart) << " à " << GetNomVille(this->destination);
+    cout << "Trajet n°" << index << " : " << GetNomVille(this->depart) << " -> " << GetNomVille(this->destination);
 }
 
 // Getters

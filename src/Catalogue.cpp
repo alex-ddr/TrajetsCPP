@@ -172,7 +172,6 @@ void Catalogue::SupprimerTrajet()
     cout << "Trajet supprimé avec succès." << endl;
 }
 
-
 void Catalogue::CreerTrajetSimple()
 {
     char ville1_buffer[100], ville2_buffer[100];
@@ -230,7 +229,6 @@ void Catalogue::CreerTrajetSimple()
     this->AjouterTrajet(tr);
 }
 
-
 void Catalogue::CreerTrajetCompose()
 {
     char ville1_buffer[100], ville2_buffer[100];
@@ -287,3 +285,46 @@ void Catalogue::AfficherCatalogue() const
     cout << endl;
 }
 
+int Backtrack(Ville v1, Ville v2, Ville v3)
+{
+    
+}
+
+void Catalogue::RechercherTrajet() const
+{
+    char ville1_buffer[100], ville2_buffer[100];
+    Ville ville1, ville2;
+
+    // Saisie des villes
+    do
+    {
+        cout << "Quelle est la ville de départ ? : ";
+        cin >> ville1_buffer;
+        ville1 = GetVille(ville1_buffer);
+
+        if (ville1 == UNKNOWN_VILLE)
+        {
+            cout << "\nVille inconnue.\n";
+            AfficherVilles(1);
+        }
+    } while (ville1 == UNKNOWN_VILLE);
+
+    do
+    {
+        cout << "Quelle est la destination ? : ";
+        cin >> ville2_buffer;
+        ville2 = GetVille(ville2_buffer);
+
+        if (ville2 == UNKNOWN_VILLE)
+        {
+            cout << "\nVille inconnue.\n";
+            AfficherVilles(1);
+        }
+        else if (ville2 == ville1)
+            cout << "\nLa destination doit être différente de la ville de départ, Veuillez réessayer : \n";
+    } while ((ville2 == UNKNOWN_VILLE) || (ville2 == ville1));
+
+    // Recherche et affichage des trajets
+    ClearScreen();
+    Backtrack(ville1, ville2, ville1);
+}
