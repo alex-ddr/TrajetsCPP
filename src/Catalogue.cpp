@@ -23,6 +23,10 @@ void Catalogue::InitialiserCatalogue()
     AjouterTrajet(new TS("Lyon", "Nice", "TukTuk"));
     AjouterTrajet(new TS("Lille", "Toulon", "Tmax"));
     AjouterTrajet(new TS("Strasbourg", "Metz", "Tank")); 
+    AjouterTrajet(new TS("Lille", "Nice", "Velo"));
+    AjouterTrajet(new TS("Metz", "Paris", "Avion"));
+    AjouterTrajet(new TS("Paris", "Rouen", "Train")); 
+    AjouterTrajet(new TS("Strasbourg", "Paris", "Train")); 
 }
 
 
@@ -107,11 +111,10 @@ void Catalogue::CreerTrajet()
         ClearScreen();
     }
 
-    if (choice == 1) {
+    if (choice == '1')
         CreerTrajetSimple();
-    } else {
+    else if (choice == '2')
         CreerTrajetCompose();
-    }
 }
 
 void Catalogue::SupprimerTrajet()
@@ -285,9 +288,61 @@ void Catalogue::AfficherCatalogue() const
     cout << endl;
 }
 
-int Backtrack(Ville v1, Ville v2, Ville v3)
+int Catalogue::Search(ElemTrajet* current, Ville depart, Ville destination, Trajet** chemin, int profondeur, Ville* visites, int& nbVisites) const
 {
-    
+    // Ajouter le trajet courant au chemin (si applicable)
+    if (profondeur > 0 && current != nullptr) {
+        chemin[profondeur - 1] = current->GetTrajet();
+    }
+
+    // Si on atteint la destination, afficher tout le chemin
+    if (depart == destination)
+    {
+        for (int i = 0; i < profondeur; ++i) {
+            chemin[i]->AfficherTrajet(i + 1);
+        }
+        cout << endl;
+        return 1; // Chemin trouvé
+    }
+
+    // Marquer la ville actuelle comme visitée
+    visites[nbVisites++] = depart;
+
+    int foundPaths = 0;
+
+    // Parcourir tous les trajets du catalogue
+    ElemTrajet* trajetCourant = liste_trajets;
+    while (trajetCourant)
+    {
+        Trajet* trajet = trajetCourant->GetTrajet();
+
+        // Vérifier si ce trajet commence par la ville actuelle
+        if (trajet->GetDepart() == depart)
+        {
+            Ville prochaineVille = trajet->GetDestination();
+            bool dejaVisitee = false;
+
+            // Vérifier si la prochaine ville a déjà été visitée
+            for (int i = 0; i < nbVisites; ++i) {
+                if (visites[i] == prochaineVille) {
+                    dejaVisitee = true;
+                    break;
+                }
+            }
+
+            // Continuer la recherche si la ville n'a pas encore été visitée
+            if (!dejaVisitee) {
+                foundPaths += Search(trajetCourant, prochaineVille, destination, chemin, profondeur + 1, visites, nbVisites);
+            }
+        }
+
+        trajetCourant = trajetCourant->GetNext();
+    }
+
+    // Retirer la ville actuelle de la liste des visites après exploration
+    --nbVisites;
+
+    return foundPaths;
 }
 
 void Catalogue::RechercherTrajet() const
@@ -302,8 +357,7 @@ void Catalogue::RechercherTrajet() const
         cin >> ville1_buffer;
         ville1 = GetVille(ville1_buffer);
 
-        if (ville1 == UNKNOWN_VILLE)
-        {
+        if (ville1 == UNKNOWN_VILLE) {
             cout << "\nVille inconnue.\n";
             AfficherVilles(1);
         }
@@ -315,16 +369,24 @@ void Catalogue::RechercherTrajet() const
         cin >> ville2_buffer;
         ville2 = GetVille(ville2_buffer);
 
-        if (ville2 == UNKNOWN_VILLE)
-        {
+        if (ville2 == UNKNOWN_VILLE) {
             cout << "\nVille inconnue.\n";
             AfficherVilles(1);
-        }
-        else if (ville2 == ville1)
+        } else if (ville2 == ville1) {
             cout << "\nLa destination doit être différente de la ville de départ, Veuillez réessayer : \n";
+        }
     } while ((ville2 == UNKNOWN_VILLE) || (ville2 == ville1));
 
     // Recherche et affichage des trajets
     ClearScreen();
-    Backtrack(ville1, ville2, ville1);
+
+    Trajet* chemin[50];
+    Ville visites[50];
+    int nbVisites = 0;
+
+    int cheminsTrouves = Search(liste_trajets, ville1, ville2, chemin, 0, visites, nbVisites);
+
+    if (cheminsTrouves == 0) {
+        cout << "Aucun trajet trouvé de " << GetNomVille(ville1) << " à " << GetNomVille(ville2) << endl;
+    }
 }

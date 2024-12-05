@@ -6,6 +6,8 @@
     "istream": "cpp",
     "limits": "cpp",
     "cstring": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "*.tcc": "cpp",
+    "string": "cpp"
   }
 }

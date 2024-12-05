@@ -26,7 +26,7 @@ public:
     void CreerTrajet();
     void SupprimerTrajet();
     void AfficherCatalogue() const;
-    int Backtrack(Ville v1, Ville v2, Ville visite);
+    int Search(ElemTrajet* current, Ville depart, Ville destination, Trajet** chemin, int profondeur, Ville* visites, int& nbVisites) const;
     void RechercherTrajet() const;
     
 };
