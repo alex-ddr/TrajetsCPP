@@ -24,7 +24,7 @@ public:
     // Methodes
     void AjouterTrajet(Trajet* t);
     void CreerTrajet();
-    void SupprimerTrajet(Trajet* t);
+    void SupprimerTrajet();
     void AfficherCatalogue() const;
 };
 

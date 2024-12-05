@@ -2,6 +2,7 @@
 #include <cstdlib>
 
 #include "Catalogue.h"
+#include "config.h"
 using namespace std;
 
 int main() {
@@ -20,16 +21,16 @@ int main() {
         }
 
 
-        cout << "\n\t~~~~~~~~~~~ Menu ~~~~~~~~~~~\nEntrez votre choix :\n\t0. Afficher le catalogue\n\t1. Ajouter un trajet au catalogue\n\t2. Supprimer un trajet du catalogue\n\t3. Quitter\n";
+        cout << "\n\t~~~~~~~~~~~ Menu ~~~~~~~~~~~\nEntrez votre choix :\n\t0. Afficher le catalogue\n\t1. Afficher les villes disponibles\n\t2. Ajouter un trajet au catalogue\n\t3. Supprimer un trajet du catalogue\n\t4. Quitter\n";
         cout << "Votre choix : ";
         cin >> choice;
         // Si l'entrée est invalide
         
         ClearScreen();
 
-        if (!((int)choice >= 48 && (int)choice <= 51)) {
+        if (!((int)choice >= 48 && (int)choice <= 52)) {
             cout << "\n--------------------/!\\------------------\n";
-            cout << "Erreur : vous devez choisir une valeur entre 0 et 3 !\n";
+            cout << "Erreur : vous devez choisir une valeur entre 0 et 4 !\n";
             cin.clear();
             cin.ignore(); 
             cout << "Appuyez sur Entrée pour recommencer...";
@@ -42,12 +43,15 @@ int main() {
                 c.AfficherCatalogue();
                 break;
             case '1': // Créer
+                AfficherVilles(0);
+                break;
+            case '2':
                 c.CreerTrajet();
                 break;
-            case '2': // Supprimer
-                cout << "Fonctionnalité à implémenter." << endl;
+            case '3': // Supprimer
+                c.SupprimerTrajet();
                 break;
-            case '3': // Quitter
+            case '4': // Quitter
                 cout << "\n\t~~~~~~~~~~~ A bientôt! ~~~~~~~~~~~\n";
                 exit(EXIT_SUCCESS);
                 break;

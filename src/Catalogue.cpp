@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 #include "../include/Catalogue.h"
+#include "Catalogue.h"
 
 using namespace std;
 
@@ -111,6 +112,64 @@ void Catalogue::CreerTrajet()
     } else {
         CreerTrajetCompose();
     }
+}
+
+void Catalogue::SupprimerTrajet()
+{
+    // si la liste est vide
+    if (liste_trajets == NULL)
+    {
+        cout << "Le catalogue est vide, il n'y a rien à supprimer." << endl;
+        return;
+    }
+
+
+    AfficherCatalogue();
+
+    int index, i = 1;
+    do
+    {
+        cout << "Veuillez indiquer le numéro du trajet que vous souhaitez supprimer (sinon entrez -1 pour annuler) : ";
+        cin >> index;
+
+        if (cin.fail() || ((index < 1 || index > nb_trajets) && index != -1))
+        {
+            cin.clear();          
+            cin.ignore(100, '\n');
+            cout << "\nVeuillez saisir un numéro de trajet correct.\n";
+            continue;
+        }
+
+        if (index == -1)
+        {
+            cout << "Suppression annulée." << endl;
+            return;
+        }
+
+    } while (index < 1 || index > nb_trajets);
+
+    ElemTrajet* current = liste_trajets;
+    ElemTrajet* prev = NULL;
+
+    // Suppression en tête
+    if (index == 1)
+    {
+        liste_trajets = current->GetNext();
+        delete current;
+        cout << "Trajet supprimé avec succès." << endl;
+        return;
+    }
+
+    while (current->GetNext() && i != index)
+    {
+        prev = current;
+        current = current->GetNext();
+        i++;
+    }
+
+    prev->SetNext(current->GetNext());
+    delete current;
+    cout << "Trajet supprimé avec succès." << endl;
 }
 
 
@@ -246,5 +305,6 @@ void Catalogue::AfficherCatalogue() const
         current = current->GetNext();
         index++;
     }
+    cout << endl;
 }
 
