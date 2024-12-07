@@ -1,6 +1,6 @@
 # Nom de l'exécutable
-tp2: build/main.o build/Catalogue.o build/ElemTrajet.o build/Trajet.o build/config.o build/TS.o build/TC.o
-	g++ -o tp2 build/main.o build/Catalogue.o build/ElemTrajet.o build/Trajet.o build/config.o build/TS.o build/TC.o
+trajets: build/main.o build/Catalogue.o build/ElemTrajet.o build/Trajet.o build/config.o build/TS.o build/TC.o
+	g++ -o trajets build/main.o build/Catalogue.o build/ElemTrajet.o build/Trajet.o build/config.o build/TS.o build/TC.o
 
 # Compilation des fichiers objets
 build/main.o: src/main.cpp include/Catalogue.h include/ElemTrajet.h include/Trajet.h include/config.h | build

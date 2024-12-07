@@ -1,36 +1,41 @@
-//---------- Interface de la classe <TC> (fichier TC.h) ----------------
+//----------- Interface de la classe <TC> (fichier TC.h) -------------------
+
+// Ce fichier définit la classe TC (Trajet Composé), qui hérite de la classe abstraite
+// Trajet. Un trajet composé est une suite de trajets simples connectés, formant un
+// itinéraire complexe.
+
+// Fonctionnalités :
+// - Construction d'un trajet composé à partir d'une liste chaînée de trajets simples.
+// - Gestion dynamique des escales avec un suivi du nombre d'étapes.
+// - Affichage des détails d'un trajet composé, incluant ses escales.
+
+
 #if ! defined ( TC_H )
 #define TC_H
 
 #include "../include/TS.h"
 #include "../include/ElemTrajet.h"
 
-//------------------------------------------------------------------------
-// Rôle de la classe <TC>
-// Cette classe représente un trajet simple.
-//------------------------------------------------------------------------
-
-class TC : public Trajet{
+class TC : public Trajet {
 protected:
-    // Attributs
-    ElemTrajet* TS_list;
-    int nb_escales;
+    ElemTrajet* TS_list; // Liste chaînée des trajets simples composant ce trajet composé
+    int nb_escales; // Nombre d'escales dans le trajet composé
 
-    // Methodes
-    ElemTrajet* CreerListe(Ville depart, Ville destination);
+    // Méthodes internes
+    ElemTrajet* CreerListe(Ville depart, Ville destination); 
+    // Crée une liste de trajets simples pour former un trajet composé
 
 public:
-    // Constructeur
-    TC();
-    TC(const char* depart, const char* destination);
-    TC(Ville depart, Ville destination);
+    // Constructeurs
+    TC(); // Constructeur par défaut
+    TC(const char* depart, const char* destination); // Initialisation par noms de villes
+    TC(Ville depart, Ville destination); // Initialisation par énumérations de villes
 
     // Destructeur
-    virtual ~TC();
+    virtual ~TC(); // Libère la mémoire de la liste des trajets simples
 
-    // Methodes
-    void AfficherTrajet(int index) const;
+    // Méthodes
+    void AfficherTrajet(int index) const; // Affiche les détails du trajet avec un index
 };
-
 
 #endif // TRAJET_H

@@ -4,11 +4,12 @@ using namespace std;
 
 //---------------------------------------------------------------- PROTEGE
 
+// Méthode pour créer une liste chaînée de trajets simples pour un trajet composé
 ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
 {
-    int index = 1;
-    ElemTrajet* FirstElem = nullptr;
-    ElemTrajet* prev = nullptr;
+    int index = 1; // Compteur pour les escales
+    ElemTrajet* FirstElem = nullptr; // Premier élément de la liste
+    ElemTrajet* prev = nullptr; // Pointeur vers l'élément précédent
 
     char current_depart[100], current_dest[100], current_trans[100];
     Ville villeDep = depart, villeDest;
@@ -16,15 +17,13 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
 
     do
     {
-        ClearScreen();
+        ClearScreen(); // Efface l'écran pour une meilleure lisibilité
         cout << "Trajet " << GetNomVille(depart) << " -> " << GetNomVille(destination) << " :\n";
-        
         cout << "\n\nEscale n°" << index << " :\n";
 
-        // Affichage du premier départ
-        if (index == 1)
+        // Gestion de la ville de départ
+        if (index == 1) // Pour la première escale
             cout << "   - Ville de départ : " << GetNomVille(depart) << "\n";
-        // Entrée de current_depart
         else
         {
             do
@@ -33,105 +32,104 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
                 cin >> current_depart;
                 villeDep = GetVille(current_depart);
 
-                if (villeDep == UNKNOWN_VILLE)
+                if (villeDep == UNKNOWN_VILLE) // Ville non valide
                 {
                     cout << "\nVille inconnue.\n";
-                    AfficherVilles(1);
+                    AfficherVilles(1); // Affiche la liste des villes pour aider l'utilisateur
                 }
-                else if (villeDep != prev->GetTrajet()->GetDestination())
+                else if (villeDep != prev->GetTrajet()->GetDestination()) // Vérifie la continuité des escales
                     cout << "\nLa ville ne correspond pas à la destination précédente. Veuillez réessayer : \n";
             }
             while ((villeDep == UNKNOWN_VILLE) || (villeDep != prev->GetTrajet()->GetDestination()));
         }
 
-        // Entrée de current_dest
+        // Gestion de la ville d'arrivée
         do
         {
             cout << "   - Ville d'arrivée : ";
             cin >> current_dest;
             villeDest = GetVille(current_dest);
 
-            if (villeDest == UNKNOWN_VILLE)
-                {
-                    cout << "\nVille inconnue.\n";
-                    AfficherVilles(1);
-                }
+            if (villeDest == UNKNOWN_VILLE) // Ville non valide
+            {
+                cout << "\nVille inconnue.\n";
+                AfficherVilles(1);
+            }
         }
         while (villeDest == UNKNOWN_VILLE);
 
-        // Entrée de current_trans
+        // Gestion du moyen de transport
         do
         {
             cout << "   - Moyen de Transport : ";
             cin >> current_trans;
             trans = GetTransport(current_trans);
 
-            if (trans == UNKNOWN_TRANSPORT)
+            if (trans == UNKNOWN_TRANSPORT) // Transport non valide
             {
                 cout << "\nMoyen de transport inconnu.\n";
-                AfficherTransports(1);
+                AfficherTransports(1); // Affiche la liste des moyens de transport pour aider l'utilisateur
             }
-
         }
         while (trans == UNKNOWN_TRANSPORT);
 
-        // Création du trajet
+        // Création d'un nouvel élément de la liste pour l'escale actuelle
         ElemTrajet* current = new ElemTrajet(new TS(villeDep, villeDest, trans));
 
-        if (index == 1)
+        if (index == 1) // Premier élément de la liste
             FirstElem = current;
         else
-            prev->SetNext(current);
+            prev->SetNext(current); // Relie l'élément précédent au nouvel élément
 
-        prev = current; // Mise à jour du pointeur précédent
-        index++;
-    } while (villeDest != destination);
+        prev = current; // Met à jour le pointeur précédent
+        index++; // Passe à l'escale suivante
+    } while (villeDest != destination); // Continue jusqu'à atteindre la destination finale
 
-    if (prev) prev->SetNext(nullptr); // Dernier élément de la liste
-    this->nb_escales = index;
-    return FirstElem;
+    if (prev) prev->SetNext(nullptr); // Marque la fin de la liste
+    this->nb_escales = index; // Met à jour le nombre total d'escales
+    return FirstElem; // Retourne le premier élément de la liste
 }
-
-
-
-
 
 //----------------------------------------------------------------- PUBLIC
 
-// Constructeur
+// Constructeurs
+
 TC::TC()
 {
+    // Constructeur par défaut
 }
 
-TC::TC(const char* depart, const char* destination):Trajet(depart, destination)
+TC::TC(const char* depart, const char* destination) : Trajet(depart, destination)
 {
+    // Initialise le trajet composé en créant une liste de trajets simples
     TS_list = CreerListe(GetVille(depart), GetVille(destination));
 }
 
-TC::TC(Ville depart, Ville destination):Trajet(depart, destination)
+TC::TC(Ville depart, Ville destination) : Trajet(depart, destination)
 {
+    // Initialise le trajet composé en créant une liste de trajets simples
     TS_list = CreerListe(depart, destination);
 }
-
 
 // Destructeur
 TC::~TC()
 {
-    delete TS_list;
+    delete TS_list; // Libère la mémoire allouée pour la liste des trajets simples
 }
 
-
 // Méthodes
+
 void TC::AfficherTrajet(int index) const
 {
+    // Affiche les détails du trajet composé avec toutes ses escales
     cout << "Trajet composé n°" << index << " de " << GetNomVille(depart) << " à " << GetNomVille(destination) << " en " << nb_escales << " escales :\n";
-    ElemTrajet* copie = TS_list;
+    ElemTrajet* copie = TS_list; // Copie pour parcourir la liste sans la modifier
     int i = 1;
-    while(copie)
+    while (copie) // Parcourt chaque escale
     {
         cout << "\t- ";
-        copie->GetTrajet()->AfficherTrajet(i);
-        copie= copie->GetNext();
+        copie->GetTrajet()->AfficherTrajet(i); // Affiche les détails de chaque trajet simple
+        copie = copie->GetNext(); // Passe à l'élément suivant
         i++;
     }
 }

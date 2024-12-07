@@ -3,48 +3,17 @@
 #include <iostream>
 using namespace std;
 
+// Tableau contenant les noms des villes, dans le même ordre que l'énumération Ville
 const char* nomsVille[] = {
-  "AixEnProvence",
-  "Amiens",
-  "Angers",
-  "Argenteuil",
-  "Besancon",
-  "Bordeaux",
-  "BoulogneBillancourt",
-  "Brest",
-  "Caen",
-  "ClermontFerrand",
-  "Dijon",
-  "Grenoble",
-  "Le Havre",
-  "Le Mans",
-  "Lille",
-  "Limoges",
-  "Lyon",
-  "Marseille",
-  "Metz",
-  "Montreuil",
-  "Montpellier",
-  "Mulhouse",
-  "Nancy",
-  "Nantes",
-  "Nice",
-  "Nimes",
-  "Orleans",
-  "Paris",
-  "Perpignan",
-  "Reims",
-  "Rennes",
-  "Rouen",
-  "SaintDenis",
-  "SaintEtienne",
-  "Strasbourg",
-  "Toulon",
-  "Toulouse",
-  "Tours",
-  "Villeurbanne"
+  "AixEnProvence", "Amiens", "Angers", "Argenteuil", "Besancon", "Bordeaux",
+  "BoulogneBillancourt", "Brest", "Caen", "ClermontFerrand", "Dijon", "Grenoble",
+  "Le Havre", "Le Mans", "Lille", "Limoges", "Lyon", "Marseille", "Metz",
+  "Montreuil", "Montpellier", "Mulhouse", "Nancy", "Nantes", "Nice", "Nimes",
+  "Orleans", "Paris", "Perpignan", "Reims", "Rennes", "Rouen", "SaintDenis",
+  "SaintEtienne", "Strasbourg", "Toulon", "Toulouse", "Tours", "Villeurbanne"
 };
 
+// Convertit un nom de ville (chaîne de caractères) en énumération Ville
 Ville GetVille(const char* nomVille) {
     if (strcasecmp(nomVille, "AixEnProvence") == 0) return AixEnProvence;
     if (strcasecmp(nomVille, "Amiens") == 0) return Amiens;
@@ -89,36 +58,19 @@ Ville GetVille(const char* nomVille) {
     return UNKNOWN_VILLE; // Ville inconnue
 }
 
+// Retourne le nom (chaîne de caractères) correspondant à une ville (énumération Ville)
 const char* GetNomVille(Ville ville) {
     return nomsVille[ville];
 }
 
-
+// Tableau contenant les noms des moyens de transport
 const char* nomsTransport[] = {
-  "Voiture",
-  "Train",
-  "Avion",
-  "Bus",
-  "Metro",
-  "Tramway",
-  "Velo",
-  "Scooter",
-  "Taxi",
-  "Pieds",
-  "Tmax",
-  "Monocycle",
-  "Velov",
-  "TukTuk",
-  "Planeur",
-  "Quad",
-  "F1",
-  "Cheval",
-  "Tank",
-  "Teleporteur",
-  "CampingCar",
-  "Pédalo"
+  "Voiture", "Train", "Avion", "Bus", "Metro", "Tramway", "Velo", "Scooter",
+  "Taxi", "Pieds", "Tmax", "Monocycle", "Velov", "TukTuk", "Planeur", "Quad",
+  "F1", "Cheval", "Tank", "Teleporteur", "CampingCar", "Pedalo"
 };
 
+// Convertit un nom de transport (chaîne de caractères) en énumération Transport
 Transport GetTransport(const char* nomTransport) {
     if (strcasecmp(nomTransport, "Voiture") == 0) return Voiture;
     if (strcasecmp(nomTransport, "Train") == 0) return Train;
@@ -146,21 +98,22 @@ Transport GetTransport(const char* nomTransport) {
     return UNKNOWN_TRANSPORT; // Transport non troouvé
 }
 
+// Retourne le nom (chaîne de caractères) correspondant à un transport (énumération Transport)
 const char* GetNomTransport(Transport transport) {
     return nomsTransport[transport];
 }
 
- // Pour la fonction system()
-
+// Efface l'écran, en fonction du système d'exploitation
 void ClearScreen()
 {
     #ifdef _WIN32
-        system("cls");
+        system("cls"); // Commande pour Windows
     #else
-        system("clear");
+        system("clear"); // Commande pour Unix/Linux
     #endif
 }
 
+// Affiche toutes les villes disponibles si demandé par l'utilisateur
 void AfficherVilles(int ask)
 {
     if (ask)
@@ -173,15 +126,16 @@ void AfficherVilles(int ask)
             cin >> choice;
             if (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N')
             {
-                ClearScreen();
+                ClearScreen(); // Réinitialise l'écran si l'entrée est invalide
                 cout << "Voulez-vous afficher la liste des villes ? (o/n) : ";
             }
         }
         while (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N');
 
-        if (choice == 'n' || choice == 'N') return;
+        if (choice == 'n' || choice == 'N') return; // Annule si l'utilisateur refuse
     }
 
+    // Affiche la liste des villes avec leur index
     cout << "Liste des villes :\n" << endl;
     for (int i = 0; i < UNKNOWN_VILLE; i++)
         cout << i + 1 << ". " << GetNomVille((Ville)i) << endl;
@@ -189,6 +143,7 @@ void AfficherVilles(int ask)
     cout << "\n";
 }
 
+// Affiche tous les moyens de transport disponibles si demandé par l'utilisateur
 void AfficherTransports(int ask)
 {
     if (ask)
@@ -199,22 +154,22 @@ void AfficherTransports(int ask)
         do
         {
             cin >> choice;
-            cin.ignore();
+            cin.ignore(); // Ignore les caractères résiduels
             if (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N')
             {
                 ClearScreen();
-                cout << choice << endl;
                 cout << "Voulez-vous afficher les modes de transport ? (o/n) : ";
             }
         }
         while (choice != 'o' && choice != 'n' && choice != 'O' && choice != 'N');
 
-        if (choice == 'n' || choice == 'N') return;
+        if (choice == 'n' || choice == 'N') return; // Annule si l'utilisateur refuse
     }
 
+    // Affiche la liste des modes de transport avec leur index
     cout << "Liste des modes de transport :\n" << endl;
     for (int i = 0; i < UNKNOWN_TRANSPORT; i++)
         cout << i + 1 << ". " << GetNomTransport((Transport)i) << endl;
-    
+
     cout << "\n";
 }

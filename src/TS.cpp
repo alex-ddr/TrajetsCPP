@@ -4,37 +4,47 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
-// Constructeur
+// Constructeurs
+
+// Constructeur par défaut
 TS::TS()
 {
+    // Pas de logique spécifique ici
 }
 
-TS::TS(const char* depart, const char* destination, const char* trans):Trajet(depart, destination)
+// Constructeur prenant des chaînes de caractères pour le départ, la destination, et le transport
+TS::TS(const char* depart, const char* destination, const char* trans) : Trajet(depart, destination)
 {
+    // Convertit le nom du transport en énumération Transport
     this->trans = GetTransport(trans);
 }
 
-TS::TS(Ville depart, Ville destination, Transport trans):Trajet(depart, destination)
+// Constructeur prenant directement des énumérations Ville et Transport
+TS::TS(Ville depart, Ville destination, Transport trans) : Trajet(depart, destination)
 {
-    this->trans = trans;
+    this->trans = trans; // Initialise directement l'attribut `trans`
 }
-
 
 // Destructeur
-TS::~TS ( )
+TS::~TS()
 {
+    // Pas de ressources dynamiques à libérer
 }
-
 
 // Méthodes
+
+// Getter pour récupérer le moyen de transport
 Transport TS::GetTrans()
 {
-    return this->trans;
+    return this->trans; // Retourne l'attribut `trans`
 }
 
+// Affiche les détails du trajet
 void TS::AfficherTrajet(int index) const
 {
+    // Appelle la méthode `AfficherTrajet` de la classe de base pour afficher le départ et la destination
     Trajet::AfficherTrajet(index);
 
+    // Ajoute le moyen de transport au format de sortie
     cout << " || " << GetNomTransport(trans) << endl;
 }
