@@ -19,14 +19,17 @@ Catalogue::Catalogue()
 
 void Catalogue::InitialiserCatalogue()
 {
-    AjouterTrajet(new TS("Paris", "Marseille", "Avion"));
-    AjouterTrajet(new TS("Lyon", "Nice", "TukTuk"));
-    AjouterTrajet(new TS("Lille", "Toulon", "Tmax"));
-    AjouterTrajet(new TS("Strasbourg", "Metz", "Tank")); 
-    AjouterTrajet(new TS("Lille", "Nice", "Velo"));
-    AjouterTrajet(new TS("Metz", "Paris", "Avion"));
-    AjouterTrajet(new TS("Paris", "Rouen", "Train")); 
-    AjouterTrajet(new TS("Strasbourg", "Paris", "Train")); 
+    // AjouterTrajet(new TS("Paris", "Marseille", "Avion"));
+    // AjouterTrajet(new TS("Lyon", "Nice", "TukTuk"));
+    // AjouterTrajet(new TS("Lille", "Toulon", "Tmax"));
+    // AjouterTrajet(new TS("Strasbourg", "Metz", "Tank")); 
+    // AjouterTrajet(new TS("Lille", "Nice", "Velo"));
+    // AjouterTrajet(new TS("Metz", "Paris", "Avion"));
+    // AjouterTrajet(new TS("Paris", "Rouen", "Train")); 
+    // AjouterTrajet(new TS("Strasbourg", "Paris", "Train")); 
+    AjouterTrajet(new TS("Lyon", "Bordeaux", "Train")); 
+    AjouterTrajet(new TS("Lyon", "Paris", "Voiture")); 
+
 }
 
 

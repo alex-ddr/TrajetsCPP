@@ -117,7 +117,16 @@ TC::TC(Ville depart, Ville destination):Trajet(depart, destination)
 // Destructeur
 TC::~TC()
 {
-    delete TS_list;
+    ElemTrajet* current = TS_list;
+    while (current != nullptr) {
+        ElemTrajet* next = current->GetNext();
+        Trajet* trajet = current->GetTrajet();
+        if (trajet != nullptr) {
+            delete trajet; // Libère le trajet
+        }
+        delete current; // Libère l'élément
+        current = next;
+    }
 }
 
 
