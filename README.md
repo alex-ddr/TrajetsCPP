@@ -18,4 +18,7 @@ Implémentation du catalogue de recherche de trajets dans le cadre de notre TP°
 
 3. **Lancer le projet**
     ```bash
-    ./tp2  
+    ./trajets  
+
+**Pour des informations complémentaires**
+    ```Ouvrir le dossier Assets ```
