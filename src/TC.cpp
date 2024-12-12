@@ -110,6 +110,26 @@ TC::TC(Ville depart, Ville destination) : Trajet(depart, destination)
     // Initialise le trajet composé en créant une liste de trajets simples
     TS_list = CreerListe(depart, destination);
 }
+TC::TC(TS** trajets, int nbTrajets) : Trajet(trajets[0]->GetDepart(), trajets[nbTrajets - 1]->GetDestination())
+{
+    if (trajets == nullptr || nbTrajets <= 0) {
+        TS_list = nullptr;
+        nb_escales = 0;
+        return;
+    }
+
+    nb_escales = nbTrajets;
+    TS_list = new ElemTrajet(trajets[0]);
+    ElemTrajet* prev = TS_list;
+
+    // Pour chaque trajet passé en paramètre, on l'ajoute à la liste chaînée de trajets simples
+    for(int i = 1; i < nbTrajets; ++i)
+    {
+        ElemTrajet* current = new ElemTrajet(trajets[i]);
+        prev->SetNext(current);
+        prev = current;
+    }
+}
 
 // Destructeur
 TC::~TC()

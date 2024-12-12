@@ -30,7 +30,7 @@ public:
     TC(); // Constructeur par défaut
     TC(const char* depart, const char* destination); // Initialisation par noms de villes
     TC(Ville depart, Ville destination); // Initialisation par énumérations de villes
-
+    TC(TS** trajets, int nbTrajets); // Initialisation avec des trajets simples
     // Destructeur
     virtual ~TC(); // Libère la mémoire de la liste des trajets simples
 

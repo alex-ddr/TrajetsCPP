@@ -19,20 +19,6 @@ Catalogue::Catalogue()
 
 void Catalogue::InitialiserCatalogue()
 {
-<<<<<<< HEAD
-    // AjouterTrajet(new TS("Paris", "Marseille", "Avion"));
-    // AjouterTrajet(new TS("Lyon", "Nice", "TukTuk"));
-    // AjouterTrajet(new TS("Lille", "Toulon", "Tmax"));
-    // AjouterTrajet(new TS("Strasbourg", "Metz", "Tank")); 
-    // AjouterTrajet(new TS("Lille", "Nice", "Velo"));
-    // AjouterTrajet(new TS("Metz", "Paris", "Avion"));
-    // AjouterTrajet(new TS("Paris", "Rouen", "Train")); 
-    // AjouterTrajet(new TS("Strasbourg", "Paris", "Train")); 
-    AjouterTrajet(new TS("Lyon", "Bordeaux", "Train")); 
-    AjouterTrajet(new TS("Lyon", "Paris", "Voiture")); 
-
-=======
-    // Ajoute des trajets prédéfinis au catalogue (pour test ou exemple)
     AjouterTrajet(new TS("Paris", "Marseille", "Avion"));
     AjouterTrajet(new TS("Lyon", "Nice", "TukTuk"));
     AjouterTrajet(new TS("Lille", "Toulon", "Tmax"));
@@ -41,7 +27,28 @@ void Catalogue::InitialiserCatalogue()
     AjouterTrajet(new TS("Metz", "Paris", "Avion"));
     AjouterTrajet(new TS("Paris", "Rouen", "Train")); 
     AjouterTrajet(new TS("Strasbourg", "Paris", "Train")); 
->>>>>>> 60fa8477f9515b7d210064a694fc5ced71cee2f7
+    AjouterTrajet(new TS("Lyon", "Bordeaux", "Train")); 
+    AjouterTrajet(new TS("Lyon", "Paris", "Voiture")); 
+
+    TS** trajetsCompo1 = new TS*[2];
+    trajetsCompo1[0] = new TS("Lyon", "Marseille", "Pédalo");
+    trajetsCompo1[1] = new TS("Marseille", "Paris", "Avion");
+    AjouterTrajet(new TC(trajetsCompo1, 2));
+    
+    TS** trajetsCompo2 = new TS*[3];
+    trajetsCompo2[0] = new TS("Metz", "Strasbourg", "Voiture");
+    trajetsCompo2[1] = new TS("Strasbourg", "Lyon", "Train");
+    trajetsCompo2[2] = new TS("Lyon", "Toulouse", "Tmax");
+    AjouterTrajet(new TC(trajetsCompo2, 3));
+
+    TS** trajetsCompo3 = new TS*[2];
+    trajetsCompo3[0] = new TS("Strasbourg", "Metz", "TukTuk");
+    trajetsCompo3[1] = new TS("Metz", "Paris", "Train");
+    AjouterTrajet(new TC(trajetsCompo3, 2));
+
+    delete[] trajetsCompo1;
+    delete[] trajetsCompo2;
+    delete[] trajetsCompo3;
 }
 
 // Destructeur
