@@ -9,12 +9,18 @@ using namespace std;
 // Constructeur par défaut
 TS::TS()
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <TS>" << endl;
+    #endif
     // Pas de logique spécifique ici
 }
 
 // Constructeur prenant des chaînes de caractères pour le départ, la destination, et le transport
 TS::TS(const char* depart, const char* destination, const char* trans) : Trajet(depart, destination)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <TS>" << endl;
+    #endif
     // Convertit le nom du transport en énumération Transport
     this->trans = GetTransport(trans);
 }
@@ -22,12 +28,18 @@ TS::TS(const char* depart, const char* destination, const char* trans) : Trajet(
 // Constructeur prenant directement des énumérations Ville et Transport
 TS::TS(Ville depart, Ville destination, Transport trans) : Trajet(depart, destination)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <TS>" << endl;
+    #endif
     this->trans = trans; // Initialise directement l'attribut `trans`
 }
 
 // Destructeur
 TS::~TS()
 {
+    #ifdef MAP
+        cout << "Appel au destructeur de <TS>" << endl;
+    #endif
     // Pas de ressources dynamiques à libérer
 }
 

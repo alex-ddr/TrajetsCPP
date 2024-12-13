@@ -106,10 +106,12 @@ const char* GetNomTransport(Transport transport) {
 // Efface l'écran, en fonction du système d'exploitation
 void ClearScreen()
 {
-    #ifdef _WIN32
-        system("cls"); // Commande pour Windows
-    #else
-        system("clear"); // Commande pour Unix/Linux
+    #ifndef MAP
+        #ifdef _WIN32
+            system("cls"); // Commande pour Windows
+        #else
+            system("clear"); // Commande pour Unix/Linux
+        #endif
     #endif
 }
 

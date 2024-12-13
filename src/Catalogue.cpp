@@ -9,14 +9,18 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
-// Constructeurs
+// Constructeur
 Catalogue::Catalogue()
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <Catalogue>" << endl;
+    #endif
     nb_trajets = 0; // Initialise le nombre de trajets dans le catalogue
     liste_trajets = nullptr; // Initialise la liste de trajets comme vide
     InitialiserCatalogue(); // Ajoute des trajets d'exemple pour démarrer
 }
 
+// Initialisation
 void Catalogue::InitialiserCatalogue()
 {
     AjouterTrajet(new TS("Paris", "Marseille", "Avion"));
@@ -54,6 +58,9 @@ void Catalogue::InitialiserCatalogue()
 // Destructeur
 Catalogue::~Catalogue()
 {
+    #ifdef MAP
+        cout << "Appel au destructeur de <Catalogue>" << endl;
+    #endif
     // Libère la mémoire de tous les trajets du catalogue
     ElemTrajet* current = liste_trajets;
     while (current != nullptr) {

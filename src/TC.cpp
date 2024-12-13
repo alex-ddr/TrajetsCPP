@@ -96,22 +96,35 @@ ElemTrajet* TC::CreerListe(Ville depart, Ville destination)
 
 TC::TC()
 {
-    // Constructeur par défaut
+    #ifdef MAP
+        cout << "Appel au constructeur de <TC>" << endl;
+    #endif
 }
 
 TC::TC(const char* depart, const char* destination) : Trajet(depart, destination)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <TC>" << endl;
+    #endif
     // Initialise le trajet composé en créant une liste de trajets simples
     TS_list = CreerListe(GetVille(depart), GetVille(destination));
 }
 
 TC::TC(Ville depart, Ville destination) : Trajet(depart, destination)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <TC>" << endl;
+    #endif
     // Initialise le trajet composé en créant une liste de trajets simples
     TS_list = CreerListe(depart, destination);
 }
+
 TC::TC(TS** trajets, int nbTrajets) : Trajet(trajets[0]->GetDepart(), trajets[nbTrajets - 1]->GetDestination())
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <TC>" << endl;
+    #endif
+
     if (trajets == nullptr || nbTrajets <= 0) {
         TS_list = nullptr;
         nb_escales = 0;
@@ -134,6 +147,9 @@ TC::TC(TS** trajets, int nbTrajets) : Trajet(trajets[0]->GetDepart(), trajets[nb
 // Destructeur
 TC::~TC()
 {
+    #ifdef MAP
+        cout << "Appel au destructeur de <TC>" << endl;
+    #endif
     ElemTrajet* current = TS_list;
     while (current != nullptr) {
         ElemTrajet* next = current->GetNext();

@@ -7,12 +7,19 @@ using namespace std;
 // Constructeur par défaut
 Trajet::Trajet()
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <Trajet>" << endl;
+    #endif
     // Aucun code spécifique ici, utilisé pour initialiser des instances sans paramètres
 }
 
 // Constructeur prenant des noms de villes (chaînes de caractères)
 Trajet::Trajet(const char* depart, const char* destination)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <Trajet>" << endl;
+    #endif
+
     // Convertit les noms de villes en énumérations Ville
     this->depart = GetVille(depart);
     this->destination = GetVille(destination);
@@ -21,6 +28,9 @@ Trajet::Trajet(const char* depart, const char* destination)
 // Constructeur prenant des énumérations Ville
 Trajet::Trajet(Ville depart, Ville destination)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <Trajet>" << endl;
+    #endif
     this->depart = depart;           // Initialise la ville de départ
     this->destination = destination; // Initialise la destination
 }
@@ -28,6 +38,9 @@ Trajet::Trajet(Ville depart, Ville destination)
 // Destructeur
 Trajet::~Trajet()
 {
+    #ifdef MAP
+        cout << "Appel au destructeur de <Trajet>" << endl;
+    #endif
     // Pas d'allocation dynamique ici, donc pas de mémoire à libérer
 }
 

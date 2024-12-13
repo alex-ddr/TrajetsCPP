@@ -8,12 +8,18 @@ using namespace std;
 // Constructeurs
 ElemTrajet::ElemTrajet()
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <ElemTrajet>" << endl;
+    #endif
     this->t = nullptr;    // Initialise le trajet à null (aucun trajet associé)
     this->next = nullptr; // Initialise le pointeur suivant à null (pas de prochain élément)
 }
 
 ElemTrajet::ElemTrajet(Trajet* t)
 {
+    #ifdef MAP
+        cout << "Appel au constructeur de <ElemTrajet>" << endl;
+    #endif
     this->t = t;          // Associe un trajet donné à cet élément
     this->next = nullptr; // Initialise le pointeur suivant à null (pas encore de lien)
 }
@@ -21,10 +27,9 @@ ElemTrajet::ElemTrajet(Trajet* t)
 // Destructeur
 ElemTrajet::~ElemTrajet()
 {
-#ifdef MAP
-    // Affiche un message lorsque le destructeur est appelé (utile en mode debug)
-    cout << "Appel au destructeur de <ElemTrajet>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au destructeur de <ElemTrajet>" << endl;
+    #endif
     // Le trajet pointé n'est pas supprimé ici pour éviter des conflits de gestion
     // de mémoire avec d'autres parties du programme.
 }
