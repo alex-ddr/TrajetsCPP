@@ -64,8 +64,7 @@ int main() {
                 break;
             case '6': // Quitte le programme
                 cout << "\n\t~~~~~~~~~~~ A bientôt! ~~~~~~~~~~~\n";
-                exit(EXIT_SUCCESS); // Termine le programme avec succès
-                break;
+                return 0;
         }
 
         // Attend que l'utilisateur appuie sur Entrée avant de revenir au menu

@@ -65,7 +65,6 @@ Catalogue::~Catalogue()
     ElemTrajet* current = liste_trajets;
     while (current != nullptr) {
         ElemTrajet* next = current->GetNext(); // Sauvegarde l'élément suivant
-        delete current->GetTrajet(); // Supprime le trajet associé
         delete current;             // Supprime l'élément lui-même
         current = next;             // Passe à l'élément suivant
     }

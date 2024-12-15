@@ -8,6 +8,7 @@
     "cstring": "cpp",
     "ostream": "cpp",
     "*.tcc": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "new": "cpp"
   }
 }

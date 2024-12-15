@@ -30,8 +30,7 @@ ElemTrajet::~ElemTrajet()
     #ifdef MAP
         cout << "Appel au destructeur de <ElemTrajet>" << endl;
     #endif
-    // Le trajet pointé n'est pas supprimé ici pour éviter des conflits de gestion
-    // de mémoire avec d'autres parties du programme.
+    delete t;
 }
 
 //-------------------------------------------------------------- PROTEGEES

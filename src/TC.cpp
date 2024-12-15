@@ -153,10 +153,6 @@ TC::~TC()
     ElemTrajet* current = TS_list;
     while (current != nullptr) {
         ElemTrajet* next = current->GetNext();
-        Trajet* trajet = current->GetTrajet();
-        if (trajet != nullptr) {
-            delete trajet; // Libère le trajet
-        }
         delete current; // Libère l'élément
         current = next;
     }
