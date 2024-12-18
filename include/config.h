@@ -92,6 +92,7 @@ enum Transport {
   Teleporteur,
   CampingCar,
   Pedalo,
+  Bateau,
   UNKNOWN_TRANSPORT  // Valeur par défaut pour les transports non reconnus
 };
 

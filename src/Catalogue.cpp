@@ -179,7 +179,7 @@ void Catalogue::SupprimerTrajet()
 
     ElemTrajet* current = liste_trajets;
     ElemTrajet* prev = NULL;
-
+    nb_trajets--;
     if (index == 1) // Suppression en tête de liste
     {
         liste_trajets = current->GetNext();

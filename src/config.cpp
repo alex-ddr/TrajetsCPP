@@ -67,7 +67,7 @@ const char* GetNomVille(Ville ville) {
 const char* nomsTransport[] = {
   "Voiture", "Train", "Avion", "Bus", "Metro", "Tramway", "Velo", "Scooter",
   "Taxi", "Pieds", "Tmax", "Monocycle", "Velov", "TukTuk", "Planeur", "Quad",
-  "F1", "Cheval", "Tank", "Teleporteur", "CampingCar", "Pedalo"
+  "F1", "Cheval", "Tank", "Teleporteur", "CampingCar", "Pedalo", "Bateau",
 };
 
 // Convertit un nom de transport (chaîne de caractères) en énumération Transport
@@ -94,6 +94,7 @@ Transport GetTransport(const char* nomTransport) {
     if (strcasecmp(nomTransport, "Teleporteur") == 0) return Teleporteur;
     if (strcasecmp(nomTransport, "CampingCar") == 0) return CampingCar;
     if (strcasecmp(nomTransport, "Pédalo") == 0) return Pedalo;
+    if (strcasecmp(nomTransport, "Bateau") == 0) return Bateau;
 
     return UNKNOWN_TRANSPORT; // Transport non troouvé
 }
