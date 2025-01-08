@@ -3,6 +3,7 @@
 
 #include "Catalogue.h"
 #include "config.h"
+#include "FileHandler.h"
 using namespace std;
 
 int main() {
@@ -28,7 +29,9 @@ int main() {
         cout << "\t3. Ajouter un trajet au catalogue\n";
         cout << "\t4. Rechercher un trajet\n";
         cout << "\t5. Supprimer un trajet du catalogue\n";
-        cout << "\t6. Quitter\n";
+        cout << "\t6. Supprimer un trajet du catalogue\n"
+        cout << "\t7. Supprimer un trajet du catalogue\n"
+        cout << "\t8. Quitter\n";
         cout << "\nVotre choix : ";
         cin >> choice;
 
@@ -62,7 +65,13 @@ int main() {
             case '5': // Supprime un trajet du catalogue
                 c.SupprimerTrajet();
                 break;
-            case '6': // Quitte le programme
+            case '6': // Sauvegarder les trajets dans un fichier
+                FileHandler.save();
+                break;
+            case '7': // Charge les trajets dans le catalogue depuis un fichier
+                FileHandler.load();
+                break;
+            case '8': // Quitte le programme
                 cout << "\n\t~~~~~~~~~~~ A bientôt! ~~~~~~~~~~~\n";
                 return 0;
         }
